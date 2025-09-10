@@ -1,0 +1,739 @@
+<style>
+	blockquote {
+		font-style: normal;
+		margin-left: 32px;
+		border-left: 4px solid #CCC;
+		padding-left: 30px;
+	}
+</style>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css"
+		integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<title>TP4 : VCenter</title>
+
+	<meta name="description" content="Cluster">
+	<meta name="author" content="Jean-Marc Menaud">
+</head>
+
+<body>
+
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse1"></font color=red size=5> Informations générales pour
+						réaliser le TP </font> </a>
+				</h4>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse">
+				<div class="panel-body">Panel Body
+
+					<table border=2>
+						<tr>
+							<td>-------- Nom -------- </td>
+							<td>---------------- URL ----------------</td>
+							<td>---------------- login ---------------- </td>
+							<td>------ password ------</td>
+						</tr>
+						<tr>
+						<tr>
+							<td>SAUVAGE </td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC1@vsphere.local</td>
+							<td>adminDC1$$</td>
+						</tr>
+						<tr>
+							<td>MÉRILLON</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC2@vsphere.local</td>
+							<td>adminDC2$$</td>
+						</tr>
+						<tr>
+							<td>GROSMANGIN</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC3@vsphere.local</td>
+							<td>adminDC3$$</td>
+						</tr>
+						<tr>
+							<td>LECLERC</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC4@vsphere.local</td>
+							<td>adminDC4$$</td>
+						</tr>
+						<tr>
+							<td>FRIOU</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC5@vsphere.local</td>
+							<td>adminDC5$$</td>
+						</tr>
+						<tr>
+							<td>CLARY</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC6@vsphere.local</td>
+							<td>adminDC6$$</td>
+						</tr>
+						<tr>
+							<td>HAUPE LIYANAGE</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC7@vsphere.local</td>
+							<td>adminDC7$$</td>
+						</tr>
+						<tr>
+							<td>MOISAN</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC8@vsphere.local</td>
+							<td>adminDC8$$</td>
+						</tr>
+						<tr>
+							<td>VO</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC9@vsphere.local</td>
+							<td>adminDC9$$</td>
+						</tr>
+						<tr>
+							<td>LECLÈRE</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC10@vsphere.local</td>
+							<td>adminDC10$$</td>
+						</tr>
+						<tr>
+							<td>LOUARN</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC11@vsphere.local</td>
+							<td>adminDC11$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC12@vsphere.local</td>
+							<td>adminDC12$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC13@vsphere.local</td>
+							<td>adminDC13$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC14@vsphere.local</td>
+							<td>adminDC14$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC15@vsphere.local</td>
+							<td>adminDC15$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC16@vsphere.local</td>
+							<td>adminDC16$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC17@vsphere.local</td>
+							<td>adminDC17$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC18@vsphere.local</td>
+							<td>adminDC18$$</td>
+						</tr>
+						<tr>
+							<td>--</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC19@vsphere.local</td>
+							<td>adminDC19$$</td>
+						</tr>
+					</table>
+
+
+				</div>
+				<div class="panel-footer">
+					Salons discord : https://discord.gg/4VZMMDu<br>
+					vesx -> user : root - Password : toto32**<br>
+					JavaPwshNfs.ova -> user : root - Password : nfs
+					<HR size=2 align=center width="100%">
+					<li> Utiliser de manière privilégiée google chrome</li>
+					<li> Quelques incohérences dans le navigateur ont pu être observé, vide le cache de données dans ce
+						cas</li>
+
+					<li>Connect on the VCenter. </li>
+					<ul>
+						<li>
+							<a href="https://vcenter.cumulus.ovh">https://vcenter.cumulus.ovh</a>
+						</li>
+						<li> Launch the HTML5 Client</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+
+
+
+
+		<h3 align=center> vCenter : Interface graphique </h3>
+		<HR size=2 align=center width="100%">
+
+
+		<div></div>
+		<h2>0 Intro <span class="badge badge-secondary">X minutes</span></h2>
+
+		<p>Connectez-vous sur le VCenter avec vos identifiants (client HTML5).
+			Deux DataCenters apparaissent : MonDatacenter et StudentDCXX (XX = numéro qui vous a été attribué).
+			MonDatacenter regroupe vos trois vESXi. Vous pouvez vous connecter à l'interface graphique du vesxXYZ
+			via vesxXYZ.cumulus.ovh
+			comme aux TP précédents</p>
+		<p>Ces trois vesx sont des machines virtuelles s'exécutant sur un même serveur physique.</p>
+		<p> Depuis MonDatacenter vous pouvez manipuler les VM des vesx comme par exemple les arreter,
+			modifier leurs capacités RAM, déconnecter la carte réseau etc ...</p>
+		<p> Ces trois VM exécutent un ESXi 8.0.3 Comme ces ESXi sont Virtualisés nous les nommons des vESX.
+			Leur numéro vesxXYZ correspond à leur IP dans le Datacenter : 10.144.208.XYZ</p>
+		<p>Les trois vESX sont regroupés dans un cluster nommé vSanStudentDCXX. Ce cluster est associé au Datacenter
+			StudentDCXX</p>
+		<p> la particularité du Cluster est de disposer d'un espace de stockage partagé entre les 3 vESX nommé
+			vSanDatastore</p>
+
+		<h4>0.1 CPU, Mémoire et Disk</h4>
+		<li> Quelles sont les capacités CPU, Mémoire et Disk d'un ESXi ?</li>
+
+		<li> Trouver les courbes de consommation CPU d'un hyperviseur ESXi</li>
+		<ul>
+			<li> Quel est l'interval de temps entre 2 mesures ?</li>
+		</ul>
+
+
+
+
+		<!-- 
+<h4> Création d'un datastore de type NFS </h4> 
+
+<p> Nous allons rajouter un espace de stockage à votre premier vESX</p>
+<p> consultez les templates sur service.cumulus.ovh</p>
+
+<li> Consultez les templates sur dl.cumulus.ovh. </li>
+<li>Installer (via OVF et URL) puis démarrer depuis l'interface graphique la VM JavaPwshNfs.ova, notez son adresse IP </li>
+Celle ci contient un serveur NFS, (version 3) et exporte le point de montage : /opt/nfsdir.
+
+<li>Ajoutez un espace de stockage NFS nommé VSanDataStore sur le premier vESXi (click droit sur l'vesx -> stockage -> ... </li>
+-->
+
+		<h2>1. Manipulation des VM avec le VCenter <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h4>1.1 Déploiement de l’OVA</h4>
+		<ul>
+			<li>Téléchargez et installez une VM à partir d’un fichier OVA disponible ici :
+				<a href="http://www.menaud.fr/tools/yVM.ova" target="_blank">yVM.ova</a>.
+			</li>
+			<li>Créez une machine virtuelle nommée <strong>tinyVM</strong> en important ce fichier OVA.</li>
+			<li>La VM est initialement configurée avec 48 Mo de mémoire, ce qui n’est pas suffisant pour un
+				fonctionnement correct. Modifiez la configuration pour lui attribuer <strong>64 Mo</strong> de mémoire.
+			</li>
+		</ul>
+
+		<h4>1.2 Démarrage de la VM</h4>
+		<ul>
+			<li>Démarrez la machine virtuelle <strong>tinyVM</strong>.</li>
+			<li>Récupérez son adresse IP depuis la console.</li>
+		</ul>
+
+		<h4>1.3 Connexion SSH</h4>
+		<ul>
+			<li>Connectez-vous en SSH sur votre ESXi.</li>
+			<ul>
+				<li>Commande : <code>ssh -p 22 root@10.144.208.1vesxnumber</code></li>
+			</ul>
+			<li>Connectez-vous ensuite en SSH à la VM <strong>tinyVM</strong> :</li>
+			<ul>
+				<li><code>ssh tc@tinyVM-IP</code> (mot de passe : <strong>VMware1!</strong>)</li>
+			</ul>
+			<li>Si la connexion échoue, il faut activer le port SSH client sur le pare-feu de votre ESXi :</li>
+			<ul>
+				<li>Allez dans <em>Networking → Firewall</em>, sélectionnez <strong>SSH Client</strong>, puis cliquez
+					sur <em>Enable</em>.</li>
+			</ul>
+		</ul>
+
+
+		<h4>1.3 Démarrage de la VM</h4>
+		<ul>
+			<li>Démarrer la machine virtuelle et se connecter à la console web.</li>
+		</ul>
+
+		<h4>1.4 Exploration de la VM</h4>
+		<ul>
+			<li>Récupérer l’adresse IP de la VM et explorer l’interface pour suspendre, reprendre et inspecter
+				différents éléments de la VM.</li>
+		</ul>
+
+
+		<h2>2. Snapshot et alarme des VM avec le VCenter <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h4>2.1 Création d'un snapshot</h4>
+		<ul>
+			<li>Créez un snapshot de la VM <strong>tinyVM</strong>, puis tapez quelques commandes dans la console web
+				pour modifier l'état de la VM.</li>
+			<li>Grâce à la gestion des snapshots, revenez à l'état initial de la VM.</li>
+		</ul>
+
+		<h4>2.2 Création d'alerte</h4>
+		<ul>
+			<li>Créez une alerte sur l'arrêt de la VM <strong>tinyVM</strong>.</li>
+			<li>Arrêtez la VM <strong>tinyVM</strong> et vérifiez que l'alerte s'est bien déclenchée.</li>
+		</ul>
+
+		<p>
+			Le <strong>vsanDatastoreXX</strong> : vSAN est une solution de stockage de type objet proposée par VMware.
+			Elle agrège un ensemble de disques situés directement dans les hôtes VMware et les présente comme un
+			datastore unique.
+			Le <strong>vsanDatastoreXX</strong> est donc un espace partagé entre vos 3 ESXi, constitué de disques
+			présents sur chacun de vos 3 ESXi.
+		</p>
+
+
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : PowerCLI </h3>
+		<HR size=2 align=center width="100%">
+
+		<p>PowerCLI est un outil en ligne de commande permettant de gèrer une infrastructure virtuelle vmWare.
+			PowerCLI s'installe comme un module de Windows PowerShell. On notera que le langage de script
+			PowerShell est disponible sous Windows dans sa version complète et sous Linux et MacOs dans une version
+			restreinte
+			appélée PowerShell Core. Cette version est suffisante pour exécuter PowerCLI.
+			Un langage de script est très utile pour administrer une plateforme afin d'automatiser de nombreuses
+			tâches, par exemple, éteindre une centaine de machines virtuelles ou installer des dizaines de machines
+			virtuelles pour faire des TP. PowerCLI permet de réaliser (pratiquement) toutes les opérations
+			disponibles
+			via l'interface web du vCenter appelée vSphere. </p>
+
+		<p>Dans ce TP, nous commencerons par une présentation rapide de PowerShell puis nous verrons différentes
+			commandes
+			de PowerCLI.</p>
+
+
+		<h4>Connection au vCentre</h4>
+		<li> Connecter vous au vCenter via l'interface graphique
+		<li> Entrer votre login adminDCX@vsphere.local et votre mot de passe adminDCX$$ avec X le numéro qui vous a
+			été attribué</li>
+		<li> Si ce n'est déjà fait, démarrez la VM tinyVM qui est sur votre datacenter (le login root et le mot
+			de passe nfs)</li>
+		<li> Obtenez l'IP de votre VM
+		<li> Connectez-vous maintenant à votre VM avec la commande ssh -l root IP_VM et le mot de passe nfs.</li>
+
+		<h2>3 Présentation rapide de PowerShell <span class="badge badge-secondary">X minutes</span> </h2>
+
+
+		<h4>3.0 Code Server</h4>
+		<p>Dans cette partie, vous allez utiliser la VM <strong>Students</strong> sur laquelle tous les logiciels
+			nécessaires aux TP sont déjà installés :</p>
+		<ul>
+			<li>Python 3</li>
+			<li>Pyvmomi</li>
+			<li>code-server</li>
+			<li>Powershell</li>
+			<li>PowerCLI</li>
+		</ul>
+
+		<p>La VM <strong>Students</strong> a pour IP : <code>10.144.208.241</code></p>
+
+		<h4>Connexion SSH</h4>
+		<ul>
+			<li>Un étudiant se connecte en SSH sur <code>10.144.208.241</code> avec les identifiants :</li>
+			<ul>
+				<li>Identifiant : <code>studentXX</code> (XX correspond au numéro de l’étudiant, ex :
+					<code>student01</code>)
+				</li>
+				<li>Mot de passe : <code>toto32**</code></li>
+			</ul>
+		</ul>
+
+		<h4>Lancement de Code Server</h4>
+		<ul>
+			<li>Lancer code-server en arrière-plan avec la commande :
+				<code>code-server --bind-addr 0.0.0.0:85XX</code> (XX correspond au numéro de l’étudiant).
+			</li>
+			<li>Récupérer l’adresse et ouvrir le navigateur à l’URL : <code>10.144.208.234:85XX</code></li>
+		</ul>
+
+		<h4>Récupération du mot de passe utilisateur</h4>
+		<ul>
+			<li>Pour obtenir le mot de passe, exécuter la commande :
+				<code>cat /home/studentXX/.config/code-server/config.yaml</code>
+			</li>
+			<li>Utiliser ce mot de passe pour se connecter à l’interface graphique de code-server.</li>
+		</ul>
+		<br>
+
+		<h4>3.1 pwsh</h4>
+		<li>Démarrer PowerShell en exécutant la commande `pwsh`</li>
+		<p>Les variables en PowerShell sont toujours précédées de '$'</p>
+		<h4>3.2 Exemple</h4>
+		<p> Pour afficher le contenu d'une variable, il suffit de l'appeler</p>
+		<pre><code class="language-python">$nb1 = 3
+$nb2 = 4
+$nb1
+$nb1 + $nb2
+</code></pre>
+		<h4>3.3 Opérations sur les tableaux</h4>
+		<p> Pour créer un tableau</p>
+		<pre><code class="language-python">$nbs = @(1, 4, 7)
+$nbs
+</code></pre>
+		<h4>3.4 Affichage de texte</h4>
+		<p>Afficher du texte</p>
+		<pre><code class="language-python">Write-Host 'la somme est' $nb1 $nb2
+Write-Host 'la somme est' ($nb1+$nb2)
+Write-Host ('la somme de {0} et {1} est {2}' -f $nb1, $nb2, ($nb1+$nb2))
+</code></pre>
+
+		<h4>3.5 Structures de contrôle</h4>
+		<li>Les conditions utilisent les mots clés if et else comme en Java</li>
+		<li> Les opérateurs de comparaisons sont :</li>
+		<ul>
+			<li>gt (greater than)</li>
+			<li> lt (less than)</li>
+			<li> eq (equal)</li>
+			<li>ge (greater or equal)</li>
+			<li>le (less or equal)</li>
+			<li>ne (not equal)</li>
+		</ul>
+		<pre><code class="language-python">if($nb1 -gt $nb2) { $nb1-$nb2 } else { $nb1 + $nb2 }
+if($nb1 -lt $nb2) { $nb1-$nb2 } else { $nb1 + $nb2 }
+</code></pre>
+
+		<h4>3.6 Boucles</h4>
+		<li> l'instruction foreach permet de parcourir un tableau
+			<pre><code class="language-python">foreach($n in $nbs) { Write-host('nb: {0}' -f $n) }
+</code></pre>
+
+			<h4>3.7 Cmdlets</h4>
+		<li> Les commandes PowerShell sont appelées cmdlet. La cmdlet Get-Help permet d'obtenir
+			de l'aide sur une cmdlet PowerShell</li>
+		<pre><code class="language-python">Get-Date
+Get-Help Get-Date
+</code></pre>
+
+		<h4>3.8 Pipeline</h4>
+		<li> Le résultat de nombreuses cmdlets peut être utilisé comme entrée d'autres cmdlets via un pipe.</li>
+		<pre><code class="language-python">Get-Process
+Get-Process | Select-Object -First 5
+</code></pre>
+
+		<h4>3.9 Tri des résultats</h4>
+		<li>Le nom des colonnes peut être utilisé pour trier les résultats obtenus avec une cmdlet</li>
+		<pre><code class="language-python">Get-Process | Sort-Object ProcessName | Select-Object -First 5
+</code></pre>
+
+		<h2>4 PowerCLI : Connection au VCenter<span class="badge badge-secondary">X minutes</span> </h2>
+
+		<h4>4.1 Sort-Object et Select-Object</h4>
+		<li> Utilisez les fonctions Sort-Object et Select-Object pour afficher les 5 processus qui consomment le
+			plus de CPU.
+			Deux approches sont possibles. </li>
+
+
+		<li> Nous rappelons que PowerCLI est un module de PowerShell. On va donc utiliser le langage de script
+			PowerShell
+			pour exécuter les cmdlets du module PowerCLI. Tester votre connexion vers le vCenter.
+			Comme vous êtes, depuis la VM tinyVM, sur le réseau interne du DataCenter, vous pouvez vous
+			connecter au VCenter directement depuis son IP interne : 10.144.208.5 ( il faut passé en tant que admin :
+			sudo pwsh)</li>
+
+		<pre><code class="language-python">Test-Connection -computername 10.144.208.5 -Count 1
+</code></pre>
+		Sortie attendue :
+		<pre><code class="language-python">Destination: 10.144.208.5
+
+Ping Source           Address                   Latency BufferSize Status
+                                                   (ms)        (B)
+---- ------           -------                   ------- ---------- ------
+   1 piserver         10.144.208.5                   0         32 Success
+</code></pre>
+
+
+		<h4>4.2 Connexion au vCenter</h4>
+		<li> Connecter au vCenter avec votre utilisateur 'adminDCX@vsphere.local' et
+			votre mot de passe 'adminDCX$$' (X est le numéro qui vous a été attribué)</li>
+		<pre><code class="language-python">Connect-VIServer -Server 10.144.208.5 -User 'adminDC33@vsphere.local' -Password 'adminDC33$$'
+</code></pre>
+		Sortie attendue
+		<pre><code class="language-python">Name                           Port  User
+----                           ----  ----
+10.144.208.5                  443   VSPHERE.LOCAL\adminDC33
+</code></pre>
+		Vous êtes maintenant connecté au vCenter. Nous allons voir comment explorer l'infrastructure.
+
+		<h2>5 Introduction à PowerCLI <span class="badge badge-secondary">X minutes</span> </h2>
+		<h3>5.1 Exploration de l'infrastructure</h3>
+
+		<li>Lister les centres de données (datacenter)</li>
+		<pre><code class="language-python">Get-Datacenter
+</code></pre>
+		Sortie attendue
+		<pre><code class="language-python">Name
+----
+MonDatacenter
+StudentDC33
+</code></pre>
+
+		<li> Lister les hyperviseurs (ESXi)</li>
+		<pre><code class="language-python">Get-VMHost
+</code></pre>
+		Sortie attendue
+		<pre><code class="language-python">Name                 ConnectionState PowerState NumCpu CpuUsageMhz CpuTotalMhz   MemoryUsageGB   MemoryTotalGB Version
+----                 --------------- ---------- ------ ----------- -----------   -------------   ------------- -------
+10.144.1.98         NotResponding   Unknown         0           0           0           0.000           0.000        
+10.144.208.99         Connected       PoweredOn       2          12        3216           1.426           7.999   6.5.0
+10.144.208.98         Connected       PoweredOn       2          11        3216           1.419           7.999   6.5.0
+10.144.208.97         Connected       PoweredOn       2          11        3216           1.418           7.999   6.5.0
+</code></pre>
+
+		<li> Lister les machines virtuelles</li>
+		<pre><code class="language-python">Get-VM
+</code></pre>
+		Sortie attendue
+		<pre><code class="language-python">Name                 PowerState Num CPUs MemoryGB
+----                 ---------- -------- --------
+vesx099              PoweredOn  2        8.000
+vesx098              PoweredOn  2        8.000
+vesx097              PoweredOn  2        8.000
+JavaPwshNfs          PoweredOn  2        2.000
+</code></pre>
+
+		<li>Quelle commande permet de lister tous les datastores (banque de données) disponibles ? </li>
+
+		<li>Quelle commande permet de lister toutes les VM hébergées sur votre datacenter (StudentDCX) ? </li>
+
+		<li>Quelle commande permet de connaître le datastore surlequel est hébergée votre VM 'tinyVM' ?</li>
+
+
+		<h3>5.2 Création de machines virtuelles </h3>
+
+		<li>Télécharger l'OVA http://www.menaud.fr/tools/yVM.ova sur votre machine virtuelle avec wget</li>
+
+		<li>Importer l'OVA téléchargé pour créer une machine virtuelle de nom yvm1 avec la cmdlet Import-VApp.
+			Quelle commande avez-vous utilisé ? </li>
+
+		<li>Avant de démarrer la VM créée, affichez la capacité mémoire de la VM yvm1.</li>
+
+		<li>Augmentez la capacité mémoire de la VM yvm1 à 256 Mo grace à la commande Set-VM</li>
+
+		Sortie attendue
+		<pre><code class="language-python">Name                 PowerState Num CPUs MemoryGB
+----                 ---------- -------- --------
+yvm1                 PoweredOff 1        0.250 
+</code></pre>
+
+
+		<li>Quelle commande permet de démarrer cette VM ? </li>
+
+		<li>Quelle commande permet de cloner cette VM pour en créer une nouvelle ? (nommez la VM yvm2) </li>
+
+		<h3>5.3 Informations sur les machines virtuelles </h3>
+
+		<li>Récupération de l'adresse MAC de yvm1 en utilisant Get-NetworkAdapter </li>
+
+		Sortie attendue
+		<pre><code class="language-python">MacAddress
+----------
+00:50:56:a7:aa:c3
+</code></pre>
+
+		<li>Récupération de l'adresse IP de la vm yvm1 en utilisant la propriété Guest de l'objet retourné par
+			Get-VM. (seulement disponible si les VMware Tools sont installés)</li>
+		<pre><code class="language-python">$vm = Get-VM yvm1
+$vm.??
+</code></pre>
+
+		<li>Listez toutes les VM allumées. Utilisez Get-VM et combiné le résultat avec Where-Object ($_ fait
+			référence à l'objet "encours") </li>
+		Exemple pour vous guider :
+		<pre><code class="language-python">Get-VM | Where-Object { $_.NumCPU -eq '1' } 
+</code></pre>
+		Sortie attendue
+		<pre><code class="language-python">Name                 PowerState Num CPUs MemoryGB
+----                 ---------- -------- --------
+vesx099              PoweredOn  2        8.000
+vesx098              PoweredOn  2        8.000
+vesx097              PoweredOn  2        8.000
+yvm1                 PoweredOn  1        0.250
+tinyVMXX            PoweredOn  2        2.000
+</code></pre>
+
+
+		<h3>5.4 Création d'un datastore</h3>
+
+
+		<li>Listez les disques physiques appartenant à un de vos hyperviseurs via la commande Get-ScsiLun </li>
+
+
+		Sortie attendue
+		<pre><code class="language-python">CanonicalN ConsoleDeviceName              LunType         CapacityGB MultipathPolicy
+ame
+---------- -----------------              -------         ---------- ---------------
+mpx.vmhba… /vmfs/devices/disks/mpx.vmhba… disk                40.000 Fixed
+mpx.vmhba… /vmfs/devices/cdrom/mpx.vmhba… cdrom                      Fixed
+mpx.vmhba… /vmfs/devices/disks/mpx.vmhba… disk                10.000 Fixed
+mpx.vmhba… /vmfs/devices/disks/mpx.vmhba… disk                 6.000 Fixed
+</code></pre>
+
+
+		<li>Quelle commande utiliser pour lister uniquement les disques physiques d'un hyperviseur (sans le
+			lecteur cdrom) ? </li>
+		<li>Comment pouvez-vous faire apparaître la valeur complète de la propriété CanonicalName ? </li>
+		<li>Quelle commande utilisée pour lister les disques physiques d'une capacité de 6 GB ? </li>
+
+		<li>Créer un nouveau datastore (nommé newDS_6G) de type vmfs à partir du disque de 6 GB. </li>
+
+		<li>Listez à présent les datastores présents sur votre datacenter </li>
+		Sortie attendue
+		<pre><code class="language-python">Name                               FreeSpaceGB      CapacityGB
+----                               -----------      ----------
+newDS_6G                                 4.290           5.000
+VSanDataStore                                    0.686           2.888
+vsanDatastore33                        111.668         119.977
+</code></pre>
+
+		<li>Retrouvez le disque physique associé au datastore qui vient d'être créé</li>
+		<pre><code class="language-python">Get-ScsiLun -Datastore newDS_6G
+</code></pre>
+		Sortie attendue
+		<pre><code class="language-python">CanonicalN ConsoleDeviceName              LunType         CapacityGB MultipathPolicy
+ame
+---------- -----------------              -------         ---------- ---------------
+mpx.vmhba… /vmfs/devices/disks/mpx.vmhba… disk               6.000   Fixed
+</code></pre>
+
+		<li> Quelle commande permet de lister seulement les datastores de type vmfs ? </li>
+
+		<h3>5.5 Les scripts </h3>
+
+		<li>Il est évidemment possible d'utiliser des scripts en PowerShell afin d'exécuter une séquence de
+			cmdlets.</li>
+		<li> Par convention, les fichiers contenant des cmdlets ont l'extension .ps1.</li>
+		<li>Le fichier suivant est nommé coloredvms.ps1. Il permet de mettre en rouge les VM éteintes et en
+			verte les VM allumées.</li>
+		<pre><code class="language-python">foreach($vm in Get-VM) {
+        if($vm.PowerState -eq 'PoweredOn') {
+                Write-Host $vm.Name -ForegroundColor Green
+        }
+        if($vm.PowerState -eq 'PoweredOff') {
+                Write-Host $vm.Name -ForegroundColor Red
+        }
+}
+</code></pre>
+		<li>Testez ce script en le lançant avec la commande suivante (toujours dans pwsh) : `./coloredvms.ps1`.
+		</li>
+
+		<li> Testez le script suivant. Que fait-il ?</li>
+		<pre><code class="language-python">$vms = Get-VM -Location StudentDC33 | Where-Object { $_.MemoryGB -lt 1 }
+$restartVms = @()
+foreach($vm in $vms) {
+        if ($vm.PowerState -eq 'PoweredOff') {
+                $vm | Start-VM -Confirm:$false | Out-Null
+        } else {
+                $vm | Stop-VM -Confirm:$false | Out-Null
+                $restartVms += $vm
+                Start-Sleep -Seconds 1
+                $vm | Start-VM -Confirm:$false
+        }
+}
+Write-Host("Restart VM: $restartVms")
+$startVms = $vms | Where-Object { $restartVms -notcontains $_ }
+Write-Host("Start VM: $startVms")
+</code></pre>
+
+		<li>Écrire un script permettant d'automatiser la création des datastores sur un datacenter. </li>
+		Le script doit récupérer tous les disques non utilisés de 6 GB du datacenter et, à partir de ces
+		disques, créer des datastores sur les hyperviseurs. (En reprenant les principes des questions
+		précédentes)
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : La migration </h3>
+		<HR size=2 align=center width="100%">
+
+		<h2>6 Migration <span class="badge badge-secondary">X minutes</span></h2>
+		Nous allons tenter de migrer la VM tinyVM créée sur le datastore vSAN d'un vesx à un autre.
+
+		<h4>6.1 Modes de migration</h4>
+		<li>Quels sont les modes de migration utilisables ?</li>
+		<li>Comment faire pour que la migration complète (compute resource and storage) soit possible ?</li>
+		<p>Pour l’instant, nous allons uniquement migrer la ressource de calcul. Pour cela :</p>
+		<ul>
+			<li>Activer la fonctionnalité vMotion sur les 2 vesx (source et destination).</li>
+			<li>Monter le datastore NFS sur le serveur de destination.</li>
+		</ul>
+
+		<h4>6.2 Mise en œuvre de vMotion</h4>
+		<li>Activez vMotion sur les vesx source et destination :
+			<ul>
+				<li>Sélectionnez le vesx dans l’interface vCenter.</li>
+				<li>Allez dans l’onglet <em>Configure</em> &gt; <em>Networking</em> &gt; <em>VMkernel adapters</em>.
+				</li>
+				<li>Éditez l’adaptateur VMkernel <strong>vmk0</strong> et cochez l’option <strong>vMotion</strong>.</li>
+			</ul>
+		</li>
+
+		<li>Montez à nouveau le datastore vSan exporté par la VM <strong>tinyVM</strong> sur le vesx de destination.
+			Le datastore doit avoir exactement le même nom sur le vesx source et sur le vesx de destination.
+		</li>
+
+		<li>Effectuez la migration de la VM tinyVM vers l’autre vesx en utilisant vMotion, puis vérifiez que l’adresse
+			IP de l’hôte de la VM a bien changé.</li>
+
+		<p>Cette opération peut aussi être réalisée automatiquement par le vCenter grâce à des fonctionnalités avancées
+			telles que l’équilibrage de charge, la gestion de l’énergie ou encore la tolérance aux pannes.
+			Ces mécanismes de placement automatisés seront étudiés lors du prochain TP.</p>
+
+
+	</div>
+	<HR size=2 align=center width="100%">
+
+	<div class="alert alert-warning">
+		<h4 class="alert alert-warning">Oufff.. finish!</h4>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"
+		integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"
+		integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
+</body>
+
+</html>

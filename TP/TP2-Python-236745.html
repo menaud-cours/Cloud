@@ -1,0 +1,451 @@
+<style>blockquote{  font-style: normal;  margin-left: 32px;  border-left: 4px solid #CCC;  padding-left: 30px;}</style>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css" integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <title>TP2 : Python SDK ESXi </title>
+  
+  <meta name="description" content="Cluster">
+  <meta name="author" content="Jean-Marc Menaud">
+</head>
+
+<body>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1"></font color=red  size=5> Informations générales pour réaliser le TP </font> </a>
+      </h4>
+    </div>
+    
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+
+ <table border=2  cellpadding="1" cellspacing="1">
+		<tr>
+		  <td>-------- Nom -------- </td>
+		  <td>-------- URL --------</td>
+		  <td>-- SSH port -- </td>
+		  <td>-- pESXi --</td>
+		</tr>
+		<tr>
+			<tr><td> -- </td><td><a href="https://10.144.208.101/" target="_blank"> 10.144.208.1<i style="color:red;">01</i> </a></td><td>22</td><td>15</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.102/" target="_blank">10.144.208.1<i style="color:red;">02</i></a></td><td>...</td><td>15</td></tr>
+			<tr><td>Student 1 </td><td><a href="https://10.144.208.103/" target="_blank">10.144.208.103</a></td><td>...</td><td>15</td></tr>
+			<tr><td>-- </td><td><a href="https://10.144.208.104/" target="_blank">10.144.208.104</a></td><td>...</td><td>15</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.105/" target="_blank">10.144.208.105</a></td><td>...</td><td>15</td></tr>
+			<tr><td>Student 2</td><td><a href="https://10.144.208.106/" target="_blank">10.144.208.106</a></td><td>...</td><td>15</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.107/" target="_blank">10.144.208.107</a></td><td>...</td><td>16</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.108/" target="_blank">10.144.208.108</a></td><td>...</td><td>16</td></tr>
+			<tr><td>Student 3</td><td><a href="https://10.144.208.109/" target="_blank">10.144.208.109</a></td><td>...</td><td>16</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.110/" target="_blank">10.144.208.110</a></td><td>...</td><td>16</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.111/" target="_blank">10.144.208.111</a></td><td>...</td><td>16</td></tr>
+			<tr><td>Student 4</td><td><a href="https://10.144.208.112/" target="_blank">10.144.208.112</a></td><td>...</td><td>16</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.113/" target="_blank">10.144.208.113</a></td><td>...</td><td>17</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.114/" target="_blank">10.144.208.114</a></td><td>...</td><td>17</td></tr>
+			<tr><td>Student 5</td><td><a href="https://10.144.208.115/" target="_blank">10.144.208.115</a></td><td>...</td><td>17</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.116/" target="_blank">10.144.208.116</a></td><td>...</td><td>17</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.117/" target="_blank">10.144.208.117</a></td><td>...</td><td>17</td></tr>
+			<tr><td>Student 6</td><td><a href="https://10.144.208.118/" target="_blank">10.144.208.118</a></td><td>...</td><td>17</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.119</a></td><td>...</td><td>18</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.120</a></td><td>...</td><td>18</td></tr>	
+			<tr><td>Student 7</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.121</a></td><td>...</td><td>18</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.122</a></td><td>...</td><td>18</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.123</a></td><td>...</td><td>18</td></tr>	
+			<tr><td>Student 8</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.124</a></td><td>...</td><td>18</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.125</a></td><td>...</td><td>20</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.126</a></td><td>...</td><td>20</td></tr>	
+			<tr><td>Student 9</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.127</a></td><td>...</td><td>20</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.128</a></td><td>...</td><td>20</td></tr>	
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.129</a></td><td>...</td><td>20</td></tr>	
+			<tr><td>Student 10</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.130</a></td><td>...</td><td>20</td></tr>	
+	</table>
+	
+      </div>
+      
+      
+      <div class="panel-footer">Salons discord: https://discord.gg/4VZMMDu<br>
+vesx -> user : root - Password: toto32**<br>
+	To connect from outside, generate your  <a href="https://eduvpn.imt-atlantique.fr/vpn-user-portal/" target="_blank"> VPN access </a><br>
+	You can use this <a href="https://openvpn.net/vpn-client/" target="_blank"> VPN Client </a><br>
+</div>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+  <div class="container">
+  
+
+ 
+	
+  <h1>Manage your vESXi from Python</h1>
+  	<p>
+	</p>
+	
+	
+	 <!-- PARTIE 1 -->
+  <div class="border-top">
+    <h2>0 comeback to PS1</h2>
+    
+    	<h4>0.1 Create and Play with 2 tinyVM <span class="badge badge-secondary">5 minutes</span></h4>
+		<p> First, download and install a simple OVA. 
+		File can be found <a href="http://menaud.fr/Cours/Cloud/TP/PS1/OVA-Linux/yVM.ova">here</a>				
+		</p>
+		<p>You muste create 2 VM: tinyVM1 and tinyVM2</p>
+		<p>
+		These tinyVM was configured with 48 Mb, it’s not sufficient for a correct execution, change this value to 64 Mb.			
+		</p>
+		<p>
+		Which is the tinyVMX's IP ? 		
+		</p>
+		
+		
+		<h4>0.2 SSH <span class="badge badge-secondary">10 minutes</span></h4>
+
+		<p>Connect by SSH on your ESXi </p>
+		<p> (If necessary, for windows users : download and use putty.exe. <a href="http://menaud.fr/Cours/Cloud/TP/PS2/SSH-Windows/putty-64bit-0.70-installer.msi">here</a>)				
+		</p>			
+
+		<p>ssh -p 22 root@10.144.208.1<i style="color:red;">vesxnumber</i> </p>
+	
+		<p>Connect to the tinyVM by ssh </p>
+		<p>ssh tc@tinyVM-IP password: VMware1!		</p>
+		
+		<p> If the connection don't work, you need to activate (enable) the ssh client port on your vesx firewall (Networking -> Firewall -> Select SSH Client -> Click on “Enable”)</p>
+		
+		
+    <h2>1 Getting started</h2>
+	<p>
+	For this practical session you will need a python environment (2.7.x or 3.4 + but I would recommend at least python3) on your computer and </span><strong>pyvmomi.</strong></p>
+	</p>
+	<p>
+	Pyvmomi is a SDK that allows you to manage VMware ESXi (and vCenter) using python, which is a system of data structures designed to provision, manage, monitor and control the life-cycle of a virtual infrastructure.
+	</p>
+	<p>You have two choices: installation on your laptop or use the VM (PythonX) provided for this course</p>	
+	
+	<p>
+	If you use your laptop, you can get pyvmomi with pip :
+	</p>
+		<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+		wget https://bootstrap.pypa.io/pip/2.7/get-pip.py</code>
+		</div><br>
+	install pip
+		<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+		python get-pip.py
+		</div>
+		then install pyvmomi<br>
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	$ pip install pyvmomi<br>
+	</div>	
+	
+	<br>
+	
+	<p>
+	If you want further information I suggest you read the official</span><a href="https://code.vmware.com/apis/968/vsphere"> <span style="font-weight: 400;">VSphere documentation</span></a>.
+	Or <a href="http://vmware.github.io/pyvmomi-community-samples/#getting-started"> <span style="font-weight: 400;">pyvmomi documentation</span></a>
+	</p>
+  </div> <!-- fin de <div class="border-top"> --> 
+  <!-- FIN DE PARTIE 1 -->
+  
+  	 <!-- PARTIE 2 -->
+  <div class="border-top">
+	<h2>2 First Steps with pyvmomi</h2>
+	<p>
+	Let's do our first step with this new SDK in order to understand how to use it to manage your VMs in the next parts of this practical session.
+	</p>
+
+
+	<h3>2.1 Connection to the VMware Vsphere API</h3>
+
+	<p> 
+	The pyvmomi library allows you to connect very easily with your VMs. To do so, open a code editor, create the file <code>myfile.py</code> and import the following function from the Pyvim.connect module :	
+	</p>
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	from pyVim.connect import SmartConnect<br>
+	</div>	
+	<br>
+	
+	<p>Then you can create your connection instance by replacing the following credentials by yours :</p>
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	c = SmartConnect(host="ip_address", user="root", pwd="Passw0rd")<br>
+	</div>	
+	<br>
+	
+	
+		
+	<p> 
+	Sadly, this won't be enough to connect to vShpere API, because this connection is using untrusted SSL certificates. To solve this problem add this parameter to the connection method, which disables SSL verification.
+	</p>
+	
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	disableSslCertValidation=True<br>
+	</div>	
+	<br>
+	
+	<p>So the line you should have is :</p>
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	c = SmartConnect(host="ip_address", user="root", pwd="Passw0rd", disableSslCertValidation=True)<br>
+	</div>	
+	<br>
+
+	<p>Now we should be good at using the API as we want.</p>
+
+	<h3>2.2 Your first script</h3>
+	<p>Now that you have a connection instance declared, you might want to write some code to manage your VMs and perform actions on them. But where to start ? What are the functions you can use ? Answers to this question can be found on the MOB. To enable the MOB, follow the next steps :</p>
+	<ol>
+		<li>Browse to the host in the vSphere Web Client navigator.</li>
+		<li>Click on the&nbsp;<strong>manage&nbsp;</strong>under Navigator on left pane.</li>
+		<li>Select&nbsp;<strong>System&nbsp;</strong>tab.</li>
+		<li>Click on&nbsp;<strong>Advanced settings</strong>.</li>
+		<li>Select the&nbsp;<strong>Config.HostAgent.plugins.solo.enableMob</strong>&nbsp;option and click&nbsp;<strong>Edit</strong>&nbsp;to enable or disable the Managed Object Browser.</li>
+	</ol>
+	
+	<p>Le Managed Object Browser (MOB) dans VMware est une interface web qui permet d'explorer et de manipuler de manière détaillée les objets gérés au sein de votre environnement vSphere. Considérez-le comme une fenêtre directe sur la structure de données interne de vCenter Server et des hôtes ESXi.</p>
+	
+	<p>Then you can connect on the MOB via this link :&nbsp;<span style="font-weight: 400;">https://ip-or-fqdn/mob. You can use the IP address or the FQDN of an ESXi host or a vCenter Server&nbsp;</span></p>
+	<p>One of the first tests we can do is to use the currentTime method. Add this line to your file :</p>
+
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	print(c.CurrentTime())<br>
+	</div>	
+	<p>The complete File: </p>
+<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+from pyVim.connect import SmartConnect <br>
+disableSslCertValidation=True <br>
+c = SmartConnect(host="10.144.208.XXX", user="root", pwd="toto32**", disableSslCertValidation=True)<br>
+print(c.CurrentTime())<br>
+</div>
+
+	<br>
+	
+	<p>Save it and run it through a terminal with python (<code>$ python3 myfile.py</code>). What is the result ?</p>
+	<p>As you can imagine, this API was not written for this kind of call but more for VMs management. That&rsquo;s what we&rsquo;re going to do now with a slightly different script.</p>
+
+	<h3> THe MOB </h3>
+	
+
+Voici un schéma conceptuel qui illustre la structure typique que vous exploreriez via le MOB.
+
+<h4> Schéma de la Hiérarchie des Objets dans vSphere </h4>
+
+Imaginez une structure en arbre où chaque nœud est un "Managed Object".
+
+<ol>
+	<li>ServiceInstance (Point d'Entrée): C'est la racine de toute l'arborescence du MOB. 
+	Lorsque vous vous connectez à `https://<votre_vcenter>/mob`, le premier objet que vous voyez est la `ServiceInstance`. 
+	Il est unique et sert de point de départ pour naviguer vers tous les autres objets.
+	</li>
+	<li>Content (Contenu) : Depuis la `ServiceInstance`, vous accédez à la propriété `content`. 
+	C'est un objet qui contient des "Managers", des sortes de répertoires qui regroupent des types d'objets spécifiques. 
+	C'est le véritable coeur de la navigation.
+	</li>
+	<li>
+	Les "Managers" : Sous `content`, vous trouverez plusieurs managers essentiels, notamment :
+		<ol>
+			<li>
+			    RootFolder : Le dossier racine qui contient toute la hiérarchie visible dans 
+			    l'inventaire de vSphere (Datacenters, clusters, VMs, etc.). C'est généralement 
+			    par là que commence l'exploration des objets d'inventaire.
+			</li>
+			<li>
+			Datacenter : À l'intérieur du `RootFolder`, vous trouvez un ou plusieurs objets `Datacenter` dans childEntity.
+			</li>
+			<li>
+				HostFolder & VmFolder : Chaque `Datacenter` contient des dossiers pour les hôtes (`hostFolder`) 
+				et pour les machines virtuelles (`vmFolder`), qui mènent respectivement aux clusters/hôtes et aux VMs.
+			</li>
+			<li>
+			ClusterComputeResource : Représente un cluster d'hôtes ESXi.
+			</li>
+			<li>
+    		HostSystem : Représente un hôte ESXi individuel.
+			</li>
+			<li>
+    		VirtualMachine : Représente une machine virtuelle.
+			</li>
+			<li>
+    		Datastore : Représente une banque de données.
+			</li>
+			<li>
+    		Network : Représente un réseau virtuel.
+			</li>	
+			<li>
+    		PerformanceManager : Permet d'accéder aux métriques de performance.
+			</li>
+			<li>
+  			SessionManager : Gère les sessions utilisateur.
+			</li>		
+		</ol>
+	</li>
+</ol>
+
+
+Ce type de schéma est donc une "carte" qui vous aide à vous orienter dans l'interface textuelle et hiérarchique du MOB.
+	
+	<h3>2.3 List all the VMs </h3>
+	<p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/0_vm_list.py" target="_blank">0_vm_list.py</a>)</p>
+
+		<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+datacenter = c.content.rootFolder.childEntity[0] <br>
+vms = datacenter.vmFolder.childEntity <br>
+
+for i in vms:<br>
+    print(i.name)<br>
+</div>
+    
+    <!--
+	<p>Open the MOB and navigate through the properties. You should find one called &ldquo;content&rdquo;. To retrieve this content in Python, the MOB tells us to use the method <em>RetrieveServiceContent().</em></p>
+
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	content = c.RetrieveServiceContent()<br>
+	</div>	
+	<br>
+	
+	
+	<p>Click on the link it provides and look for &ldquo;rootFolder&rdquo; and also click on its value. The equivalent of doing this in Python is :</p>
+
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	container = content.rootFolder<br>
+	</div>	
+	<br>
+	
+	<p>Now that this line is written, we are at the root of our datacenter, where our VM is. We just need a way to work with our VMs properly in python. To do so, we use <em>vim</em> from&nbsp;<em>pyvmomi&nbsp;</em> and the&nbsp;<em>CreateContainerView()</em> function referenced in the&nbsp;<em>ViewManager&nbsp;</em>page of the MOB.</p>
+
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	view_type = [vim.VirtualMachine]<br>
+	recursive = True<br>
+	container_view = content.viewManager.CreateContainerView(container, view_type, recursive)<br>
+	</div>	
+	<br>
+	
+	
+
+	<p>We just created a view of our datacenter. Now, to list the vms that it contains, you just have to write :</p>
+	
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	vm_list = container_view.view<br>
+	</div>	
+	<br>
+	
+	<p>Finally, back again on the MOB, click one of the VMs ids. You can now check their properties and see that their names are considered as one. So to list all of your VMs with python you just need to add :</p>
+	
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	for vm in vms :<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;print(vm.name)<br>
+	</div>	
+	<br>
+	-->
+	
+	Let’s take this statement and look at everything after the “c”. We will use the MOB to navigate through the API. This will help you to understand, how the Python code and the structure of the vSphere API correlate.
+	
+		<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+	datacenter = c.content.rootFolder.childEntity[0]</div><br>
+	Open the MOB. You will easily find  the property “content”. <br>
+
+	<img src=images/1.png width="400" > <br>
+	
+	Click on “content” and search for the property “rootFolder”. <br>
+
+	<img src=images/2.png width="400"  >  <br>
+
+	Click on the value “ha-folder-root.” The property “childEntity” is an ManagedObjectReference (MOR) and references to all datacenters (the counting starts at 0) known to the ESXi or vCenter. The value “childEntity[0]” will give us the first datacenter.  <br>
+
+	<img src=images/3.png width="400" >  <br>
+	
+	If we have the datacenter, the way to get the names of the VMs is the same. You can use the MOB, to verify this.<br>
+	
+		<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+		vms = datacenter.vmFolder.childEntity</div><br>
+	
+	Click on the value “ha-datacenter”. At the bottom of the list, you will find the property “vmFolder”.<br>
+
+	<img src=images/4.png width="400" ><br>
+
+
+	Click on the value “ha-folder-vm”.<br>
+
+	<img src=images/5.png width="400" ><br>
+
+	The MOR “childEntity” references to two VMs. Click on one of the IDs.<br>
+
+	<img src=images/6.png width="400" ><br>
+	
+	The property “name” includes the name of the VM. Because of this, we can use a simple<br>
+
+		<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+		for i in vms:<br>
+    print(i.name)</div><br>
+
+	to get the name for each VM.<br>
+
+
+	<p>Run this script. What is the result ?</span></p>
+
+
+	<h2>3 VM Management </h2>
+
+
+	Thanks to the MOB, to <a href="http://vijava.sourceforge.net/vSphereAPIDoc/ver5/ReferenceGuide/index-mo_types.html">this documentation</a>
+	and the provided python scripts, answer the following problems by filling the missing code.</p>
+	<p>Download and use <a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/utils.py" target="_blank"> utils.py</a> file.</p>
+
+
+	<h3>3.1 Access configuration</h3>
+	<p>(complete the <a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/1_vm_config.py" target="_blank"> 1_vm_config.py </a> file)</p>
+	
+	<p>Retrieve these properties from your VM : name, state (powerState), memory size (memoryMB), number of virtual CPUs (numCPU).</p>
+	
+	<h3>3.2 VM life cycle</h3> 
+	<p>Complete the following files: 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/2_power_on.py" target="_blank"> 2_power_on.py </a>, 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/3_power_off.py" target="_blank"> 3_power_off.py </a>,
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/4_suspend.py" target="_blank"> 4_suspend.py </a>, 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/5_resume.py" target="_blank"> 5_resume.py </a> </p>
+	
+	<p>Figure out how to power on, power off, suspend and resume your VM.</p>
+
+	<h3>3.3 Snapshot your VM</h3>
+	
+	<p>Complete the following files: 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/6_vm_snapshot.py" target="_blank"> 6_vm_snapshot.py </a>, 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/7_vm_remove_snapshots.py" target="_blank"> 7_vm_remove_snapshots.py</a></p>
+	
+	<p>Do a snapshot of your VM, then, list the existing snapshots. Remove all snapshots.</p>
+
+	<h3>3.4 CPU Activity</h3>
+	<p>Complete the following file: 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP2-Python/8_vm_cpu_info.py" target="_blank"> 8_vm_cpu_info.py </a>, 
+
+	<p>Retrieve the CPU information of your VM.</p>
+
+
+
+<div class="alert alert-warning">
+      <h4 class="alert alert-warning">Oufff.. finish!</h4>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
+</body>
+</html>

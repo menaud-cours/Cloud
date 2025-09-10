@@ -1,0 +1,377 @@
+<style>
+	blockquote {
+		font-style: normal;
+		margin-left: 32px;
+		border-left: 4px solid #CCC;
+		padding-left: 30px;
+	}
+</style>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css"
+		integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<title>TP5 : DRS/HA/FT VCenter</title>
+
+	<meta name="description" content="Cluster">
+	<meta name="author" content="Jean-Marc Menaud">
+</head>
+
+<body>
+
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse1"></font color=red size=5> Informations générales pour
+						réaliser le TP </font> </a>
+				</h4>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse">
+				<div class="panel-body">Panel Body
+
+					<table border=2>
+						<tr>
+							<td>Nom </td>
+							<td>URL </td>
+							<td>Login </td>
+							<td>Password </td>
+						</tr>
+						<tr>
+						<tr>
+							<td>ALEMAN Xavier </td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC1@vsphere.local</td>
+							<td>adminDC1$$</td>
+						</tr>
+						<tr>
+							<td>BAVAZZANO Paul</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC2@vsphere.local</td>
+							<td>adminDC2$$</td>
+						</tr>
+						<tr>
+							<td>CARREZ Robin</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC3@vsphere.local</td>
+							<td>adminDC3$$</td>
+						</tr>
+						<tr>
+							<td>CHONIGBAUM Emeric</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC4@vsphere.local</td>
+							<td>adminDC4$$</td>
+						</tr>
+						<tr>
+							<td>COUTANT Théo</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC5@vsphere.local</td>
+							<td>adminDC5$$</td>
+						</tr>
+						<tr>
+							<td>DAILLET Evrard-Nil</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC6@vsphere.local</td>
+							<td>adminDC6$$</td>
+						</tr>
+						<tr>
+							<td>EL KANTACHE Ismaïl</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC7@vsphere.local</td>
+							<td>adminDC7$$</td>
+						</tr>
+						<tr>
+							<td>GAONACH Maël</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC8@vsphere.local</td>
+							<td>adminDC8$$</td>
+						</tr>
+						<tr>
+							<td>HASCOET Raphaël</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC9@vsphere.local</td>
+							<td>adminDC9$$</td>
+						</tr>
+						<tr>
+							<td>HERBELIN Thomas</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC10@vsphere.local</td>
+							<td>adminDC10$$</td>
+						</tr>
+						<tr>
+							<td>LAMY Marc</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC11@vsphere.local</td>
+							<td>adminDC11$$</td>
+						</tr>
+						<tr>
+							<td>LE BARS Simon</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC12@vsphere.local</td>
+							<td>adminDC12$$</td>
+						</tr>
+						<tr>
+							<td>LE GALLOUDEC Samy</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC13@vsphere.local</td>
+							<td>adminDC13$$</td>
+						</tr>
+						<tr>
+							<td>LE MENN Florian</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC14@vsphere.local</td>
+							<td>adminDC14$$</td>
+						</tr>
+						<tr>
+							<td>OMOND Antoine</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC15@vsphere.local</td>
+							<td>adminDC15$$</td>
+						</tr>
+						<tr>
+							<td>PELECQ Lucas</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC16@vsphere.local</td>
+							<td>adminDC16$$</td>
+						</tr>
+						<tr>
+							<td>SYED KHASIM Javed</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC17@vsphere.local</td>
+							<td>adminDC17$$</td>
+						</tr>
+						<tr>
+							<td>TEK Barthélémy</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC18@vsphere.local</td>
+							<td>adminDC18$$</td>
+						</tr>
+						<tr>
+							<td>TRAN HOAN My</td>
+							<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a>
+							</td>
+							<td>adminDC19@vsphere.local</td>
+							<td>adminDC19$$</td>
+						</tr>
+					</table>
+
+
+				</div>
+				<div class="panel-footer">
+					Salons discord : https://discord.gg/4VZMMDu<br>
+					vesx -> user : root - Password : NTEcloud$$<br>
+					JavaNfsX -> user : root - Password : nfs
+					<HR size=2 align=center width="100%">
+					<li> Utiliser de manière privilégiée google chrome</li>
+					<li> Quelques incohérences dans le navigateur ont pu être observé, vide le cache de données dans ce
+						cas</li>
+
+					<li>Connect on the VCenter. </li>
+					<ul>
+						<li>
+							<a href="https://vcenter.cumulus.ovh">https://vcenter.cumulus.ovh</a>
+						</li>
+						<li> Launch the HTML5 Client</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : Distributed Ressource Scheduler (DRS) </h3>
+		<HR size=2 align=center width="100%">
+		<h2>0 Intro</h2>
+
+		<p>La Fonction DRS (Distributed Ressource Scheduler) est disponible dans un cluster VMware,
+			cette fonction permet d’équilibrer la charge des hôtes grâce au déplacement des machines
+			virtuelles de manière automatique (vMotion). Elle va répartir les VMs sur les différents
+			hôtes du cluster en fonction de leur utilisation et de leurs ressources.
+		<p>
+		<p>
+			Voici un lien de documentation:
+			https://docs.ovh.com/fr/private-cloud/vmware-drs-distributed-ressource-scheduler-new/
+		</p>
+
+		<h2>1 DRS <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h3>1.1 Environnement logiciel</h3>
+		<p>Pour notre TP nous allons avoir besoin de 3 VM.</p>
+
+		<h4>1.1.1 Créer VM</h4>
+		<li>Créer une machine virtuelle (tinyVM1) sur un ESXi à partir de l'OVA yVM.ova sur le stockage de type vSan
+			(un serveur SSH est inclus dans la VM)</li>
+		<ul>
+			<li><code>wget www.menaud.fr/tools/yVM.ova</code></li>
+			<li>Ou en passant par un "déployer un modèle OVF" wget www.menaud.fr/tools/yVM.ova</li>
+			<li>Modifier les capacités RAM de cette VM pour monter à 100 Mo</li>
+			<li>Démarrer la VM en mode ligne de commande</li>
+			<li>Connectez-vous en ssh (Compte utilisateur : tc / VMware1!) sur la VM via l'ESXi</li>
+			<li>(Pensez au pare-feu : activer la sortie SSH sur votre ESX via Click droit sur l'ESX → Paramètres →
+				Système/Pare-feu → Modifier → SSH Client → Activer)</li>
+			<li>Récupérez par wget, puis installez le package stress.tgz à l'aide de l'outil tce-load</li>
+			<li><code>wget www.menaud.fr/tools/stress.tcz</code></li>
+		</ul>
+
+		<h4>1.1.2 Charge CPU</h4>
+		<li>Créer une charge CPU avec l'outil stress. Observer les consommations CPU des VM et les consommations de
+			chaque CPU de l'hyperviseur.</li>
+		<ul>
+			<li>Noter les consommations CPU après quelques minutes. Comment expliquez-vous ces chiffres ?</li>
+		</ul>
+
+		<h4>1.1.3 Cloner VM</h4>
+		<li>Cloner la tinyVM1 deux fois afin d'avoir 3 tinyVM (2 et 3) démarrées sur le même ESXi</li>
+
+		<h4>1.1.4 Stress VM</h4>
+		<li>Exécuter un stress CPU sur chaque VM. Quelles sont les consommations CPU de chaque VM et de
+			l'hyperviseur après quelques minutes ?</li>
+
+		<h4>1.1.5 CPU Ready</h4>
+		<li>À quoi correspond la métrique de CPU appelée cpu_ready. Quelles sont ces valeurs ?</li>
+
+		<h3>1.2 En action !</h3>
+
+		<h4>1.2.1 Stop Stress</h4>
+		<li>Arrêter le stress CPU</li>
+
+		<h4>1.2.2 Activer vMotion</h4>
+		<li>Activer le vMotion sur les ESXi</li>
+
+		<h4>1.2.3 Activer DRS</h4>
+		<li>Activer la gestion dynamique des ressources (DRS) du cluster.</li>
+
+		<h4>1.2.4 Stress Cluster</h4>
+		<li>Exécuter un stress CPU sur les 3 VM et noter les consommations CPU après quelques minutes. Comment
+			expliquez-vous ces valeurs ?</li>
+
+		<h4>1.2.5 Règles Placement</h4>
+		<li>Ajouter une règle de placement dans le cluster obligeant 2 VM à être hébergées sur des ESXi différents.<br>
+			Par exemple, les VM <strong>tinyVM1</strong> et <strong>tinyVM2</strong> doivent être séparées et ne jamais
+			s’exécuter sur le même hyperviseur.<br>
+			Vous pouvez ajouter cette règle à partir du panneau <em>"VM/Host Rule"</em> de l’onglet
+			<em>Configure</em>.<br>
+			Quelle règle avez-vous utilisée ?
+		</li>
+
+
+		<h4>1.2.6 Fonctions Règles</h4>
+		<li>Décrivez les fonctions des règles disponibles</li>
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : High Availability (HA) </h3>
+		<HR size=2 align=center width="100%">
+		<h2>2 HA <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h4>2.1 Créer VM</h4>
+		<li>Si ce n'est déjà fait, créez une VM (yvm1) sur l'espace de stockage du vSan à partir de l'OVF yVM.ova
+		</li>
+
+		<h4>2.2 Ping VM</h4>
+		<li>Depuis votre machine virtuelle Students, lancer un ping vers la yvm1</li>
+
+		<h4>2.3 Crasher VM</h4>
+		<li>Provoquer un crash du système d'exploitation de la yvm1<br>
+			La commande suivante, exécutée à l'intérieur de la VM pour "crasher" la VM :
+			<code>sudo sh -c "echo c > /proc/sysrq-trigger"</code>
+		</li>
+
+		<h4>2.4 Vérifier ping</h4>
+		<li>Vérifier l'absence de réponse au ping correspondant au crash de la VM</li>
+
+		<h4>2.5 Configurer HA</h4>
+		<li>Configurer le mode haute disponibilité pour obtenir un redémarrage des VM en cas de panne de
+			l'hyperviseur (ESXi) et en cas de panne de la VM</li>
+
+		<h4>2.6 Paramètres HA</h4>
+		<li>Quels sont les 2 paramètres utilisés lors de la détection de pannes sur les VM ? Expliquez-les</li>
+
+		<h4>2.7 Redémarrer VM</h4>
+		<li>Après avoir configuré correctement le mode HA du cluster, redémarrer la yvm1</li>
+
+		<h4>2.8 Tester HA</h4>
+		<li>Relancer le ping sur la VM et crasher de nouveau le système d'exploitation. Après quelques minutes,
+			qu'observez-vous ? Pourquoi ?</li>
+
+		<h4>2.9 Indisponibilité</h4>
+		<li>Quelle est la durée d'indisponibilité de la VM ? Comment réduire ce temps d'indisponibilité ?</li>
+
+		<h4>2.10 Déconnecter ESXi</h4>
+		<li>Tout en continuant à pinger la VM, déconnecter la carte réseau de l'ESXi hôte. Après quelques minutes,
+			qu'observez-vous ? Pourquoi ?</li>
+
+		<h4>2.11 Reconnecter ESXi</h4>
+		<li>Reconnecter la carte réseau de l'ESXi et attendez sa reconnexion au datacenter</li>
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : Fault Tolerance (FT) </h3>
+		<HR size=2 align=center width="100%">
+		<h2>3 FT <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h4>3.1 Créer VM</h4>
+		<li>Nous allons installer une nouvelle VM : yVMFT. Pour cela, clic droit sur le cluster
+			<strong>vSanStudentDCXX</strong>, puis déployer un modèle OVF. Pour l'URL :
+			<code>http://www.menaud.fr/tools/core-11.1-x86.ova</code> à déployer sur le
+			<strong>vSanDatastoreXX</strong>.</li>
+
+		<h4>3.2 Activer FT</h4>
+		<li>Activer la tolérance aux pannes (Fault Tolerance) sur la yVMFT.</li>
+		<p><strong>Guide :</strong> Pour activer FT : assurez-vous que vMotion et Fault Tolerance Logging sont activés
+			sur tous les ESXi du cluster. Ensuite, clic droit sur la VM → <em>Fault Tolerance → Turn On Fault
+				Tolerance</em>.</p>
+
+		<h4>3.3 Ping VM</h4>
+		<li>Lancer un ping vers la VM yVMFT depuis la VM Students.</li>
+
+		<h4>3.4 Simuler panne</h4>
+		<li>Pour simuler une panne, déconnecter la carte réseau d'un des ESXi exécutant la VM yVMFT. Attendre quelques
+			minutes...</li>
+
+		<h4>3.5 Différence HA / FT</h4>
+		<li>Quelle différence observez-vous entre le HA et la tolérance aux pannes ?</li>
+
+		<h4>3.6 Nombre VM / Fonctionnement</h4>
+		<li>Combien de VM sont hébergées sur le cluster ? Comment fonctionne la tolérance aux pannes ?</li>
+
+		<h4>3.7 Désactiver FT et HA</h4>
+		<li>Désactiver la tolérance aux pannes et le HA.</li>
+
+
+
+		<div class="alert alert-warning">
+			<h4 class="alert alert-warning">Oufff.. finish!</h4>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"
+			integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"
+			integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
+	</div>
+</body>
+
+</html>

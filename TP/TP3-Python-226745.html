@@ -1,0 +1,278 @@
+<style>blockquote{  font-style: normal;  margin-left: 32px;  border-left: 4px solid #CCC;  padding-left: 30px;}</style>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css" integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <title>TP3 : Algo Placement</title>
+  
+  <meta name="description" content="Cluster">
+  <meta name="author" content="Jean-Marc Menaud">
+</head>
+
+<body>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1"></font color=red  size=5> Informations générales pour réaliser le TP </font> </a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">Panel Body
+      
+       <table border=2  cellpadding="1" cellspacing="1">
+		<tr>
+		  <td>-------- Nom -------- </td>
+		  <td>-------- URL --------</td>
+		  <td>-- SSH port -- </td>
+		  <td>-- pESXi --</td>
+		</tr>
+		<tr>
+			<tr><td> SAUVAGE </td><td><a href="https://10.144.208.101/" target="_blank"> 10.144.208.1<i style="color:red;">01</i> </a></td><td>22</td><td>11</td></tr>
+			<tr><td> MÉRILLON </td><td><a href="https://10.144.208.102/" target="_blank">10.144.208.1<i style="color:red;">02</i></a></td><td>...</td><td>11</td></tr>
+			<tr><td> GROSMANGIN </td><td><a href="https://10.144.208.103/" target="_blank">10.144.208.103</a></td><td>...</td><td>11</td></tr>
+			<tr><td> LECLERC </td><td><a href="https://10.144.208.104/" target="_blank">10.144.208.104</a></td><td>...</td><td>11</td></tr>
+			<tr><td> FRIOU </td><td><a href="https://10.144.208.105/" target="_blank">10.144.208.105</a></td><td>...</td><td>11</td></tr>
+			<tr><td> CLARY </td><td><a href="https://10.144.208.106/" target="_blank">10.144.208.106</a></td><td>...</td><td>11</td></tr>
+			<tr><td> HAUPE LIYANAGE </td><td><a href="https://10.144.208.107/" target="_blank">10.144.208.107</a></td><td>...</td><td>12</td></tr>
+			<tr><td> MOISAN </td><td><a href="https://10.144.208.108/" target="_blank">10.144.208.108</a></td><td>...</td><td>12</td></tr>
+			<tr><td> VO </td><td><a href="https://10.144.208.109/" target="_blank">10.144.208.109</a></td><td>...</td><td>12</td></tr>
+			<tr><td> LECLÈRE </td><td><a href="https://10.144.208.110/" target="_blank">10.144.208.110</a></td><td>...</td><td>12</td></tr>
+			<tr><td> LOUARN </td><td><a href="https://10.144.208.111/" target="_blank">10.144.208.111</a></td><td>...</td><td>12</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.112/" target="_blank">10.144.208.112</a></td><td>...</td><td>12</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.113/" target="_blank">10.144.208.113</a></td><td>...</td><td>14</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.114/" target="_blank">10.144.208.114</a></td><td>...</td><td>14</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.115/" target="_blank">10.144.208.115</a></td><td>...</td><td>14</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.116/" target="_blank">10.144.208.116</a></td><td>...</td><td>14</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.117/" target="_blank">10.144.208.117</a></td><td>...</td><td>14</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.118/" target="_blank">10.144.208.118</a></td><td>...</td><td>14</td></tr>
+			<tr><td>--</td><td><a href="https://10.144.208.119/" target="_blank">10.144.208.119</a></td><td>...</td><td>14</td></tr>	
+	</table>
+	
+      </div>
+      <div class="panel-footer">Salons discord: https://discord.gg/4VZMMDu<br>
+vesx -> user : root - Password: toto32**<br>
+	To connect from outside, generate your  <a href="https://eduvpn.imt-atlantique.fr/vpn-user-portal/" target="_blank"> VPN access </a><br>
+	You can use this <a href="https://openvpn.net/vpn-client/" target="_blank"> VPN Client </a><br>
+</div>
+
+
+
+  </div>
+</div>
+
+  <div class="container">
+
+	
+  <h1>Placement de VM sous contraintes</h1>
+  	<p>
+	</p>
+<ul>	
+<li>Constraint Programming:</li>
+<li>https://developers.google.com/optimization/cp/cp_solver</li>
+<li>https://developers.google.com/optimization/cp/cp_example</li>
+<li>Bin packing:</li>
+<li>https://developers.google.com/optimization/bin/bin_packing</li>
+</ul>
+
+	 <!-- PARTIE 1 -->
+<div class="border-top">
+	<h2>0 Intro</h2> 
+	 Dans ce TP, nous allons utiliser le solveur de contraintes de Google. La
+  documentation est https://developers.google.com/optimization/cp/cp_solver. <br>
+
+	<h3>0.1 Install  <span class="badge badge-secondary">5 minutes</span></h3>
+
+Installer la librairie `ortools` à partir de pip
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+python3 -m pip install ortools <br>
+# ou <br>
+pip3 install ortools <br>
+</div>
+
+	<h3>0.2 First test  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	Exécuter le fichier <a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/intro.py" target="_blank"> intro.py </a><br>
+	Que fait ce programme ?
+	
+	<h3>0.3 solve()  <span class="badge badge-secondary">5 minutes</span></h3>
+	La fonction solver.solve() retourne un statut pouvant avoir 5 valeurs.<br>
+    Quelles sont les statuts possibles pour un problème possèdant des solutions ?
+
+	<h3>0.4 x,y,z  <span class="badge badge-secondary">5 minutes</span></h3>
+	Modifier le programme afin d'afficher les valeurs de x, y et z de la solution
+  	trouvée par le solveur. <br>
+  	Quelles sont les valeurs de x, y et z ?
+
+	<h3>0.5 x < z  <span class="badge badge-secondary">5 minutes</span></h3>
+	Modifier le programme pour ajouter la contrainte : "x doit être strictement
+  	plus petit que z". <br>
+  	Quelles sont les valeurs de x, y et z ?
+  	
+  	<h3>0.6 all  <span class="badge badge-secondary">5 minutes</span></h3>
+
+  	À l'aide de la documentation et de la classe VarArraySolutionPrinter du module
+  s_printer.py, afficher toutes les solutions du problème décrits. Lister les
+  solutions obtenues.<br>
+  <i>Pour importer la classe VarArraySolutionPrinter, utiliser la ligne suivante:
+    `from s_printer import VarArraySolutionPrinter`</i>
+    
+    
+</div>
+   <!-- FIN DE PARTIE 1 -->
+  
+  	 <!-- PARTIE 2 -->
+  <div class="border-top">
+	<h2>1 Dynamic consolidation</h2>
+
+	First go to : https://developers.google.com/optimization <br>
+	and https://developers.google.com/optimization/introduction/python <br>
+	
+	
+	<h3>1.1 Profit for a Cloud provider  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	 We are a cloud provider. We have already sold 5 VMs to ours clients. 
+	 Each VM has a cost (between 1 to 10 dollars) for our client (ex [10,3,5,1,9]). 
+	 Print on the screen our profit.<br>		
+	<i><p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/q1.py" target="_blank">q1.py</a>)
+	</p></i>
+			
+	<h2>2 Profit with Contention for a Cloud provider</h2>
+	<i><p>(download 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/s_printer.py" target="_blank">s_printer.py</a>)
+	</p></i>
+
+	<p>Inside the terminal : wget http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/s_printer.py</p>
+	<p>We have 5 VMs. 
+	Each VM has a State (0=Off, 1=On). 
+	Our data center is very limited, so we cant host all clients VMs. 
+	In our new problem, we want exactly nbRunning VMs On.
+	Every VM can have the value 0 (off VM) or 1 (on VM). 
+	The sum of every VM state must be equal to nbRunning.</p>
+
+	<p>We can use the VarArraySolutionPrinterWithLimit() solution printer to
+	display only N solutions. For example, VarArraySolutionPrinterWithLimit(x, 3)
+	displays the 3 solutions of the problem. We can use the function last_solution()
+	to retrieve the variable values of the last solution in an array.</p>
+
+
+	
+	<h3>2.1 Contention on the Infrastructure <span class="badge badge-secondary">5 minutes</span></h3>
+	Write a code to compute the state of the 5 VM. 
+	Print all VM States and compute the cost.
+	
+	<i><p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/q2_1.py" target="_blank">q2_1.py</a>)
+	</p></i>
+	
+	<h3>2.2 Generic solution fo contention on the Infrastructure <span class="badge badge-secondary">15 minutes</span></h3>
+	
+	Use one variable nbVM to define the number of VM of our datacenter. 
+	Define the number of the model variables from the nbVM variable. For example,
+
+	<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+   variables = []<br>
+   for i in range(nbVM):<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;variables.append(model.NewIntVar(0, X, 'vm%i'))<br>
+	</div>
+   
+   Display 5 solutions of our problem and compute the cost for one of them.
+   	
+   	<i><p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/q2_2.py" target="_blank">q2_2.py</a>)
+	</p></i>
+	
+	<h3>2.3 Cost of every solution  <span class="badge badge-secondary">5 minutes</span></h3>
+	
+	<i><p>(download 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/s_printer_correction.py" target="_blank">s_printer_correction.py</a>)
+	</p></i>
+	
+	Create the class VarArraySolutionPrinterWithLimitAndCost 
+	that displays the cost of every solution. 
+	The __init__ method shoud have the following 
+	arguments: __init__(self, variables, limit, vmCosts)
+   
+    <i><p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/q2_3.py" target="_blank">q2_3.py</a>)
+	</p></i>
+	
+	<h3>2.4 exactly nbRunning VM  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	Now, we want exactly nbRunning VM while maximizing our profit. 
+	Compute and display the optimal solution using the model.Maximize() function.
+
+   	<i><p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/q2_4.py" target="_blank">q2_4.py</a>)
+	</p></i>
+	
+	<h2>3 BinPacking</h2>
+	
+	<h3>3.1 first experiment <span class="badge badge-secondary">5 minutes</span></h3>
+   	<i><p>(complete the 
+	<a href="http://www.menaud.fr/Cours/Cloud/TP/TP3-Python/q3_1.py" target="_blank">q3_1.py</a>)
+	</p></i>
+	
+	We have 5 objects with [2, 2, 5, 8, 5] for their capacities. 
+	We have 4 bins of 8. By using the google
+	example(https://developers.google.com/optimization/bin/bin_packing), write a
+	code that solves this problem.
+   
+   	<h3>3.2 Explain  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	Comment the line `solver.Minimize()`. 
+   	Explain the purpose of the Minimize() objective.
+   
+   	<h2>4 BinPacking and VM Placement</h2>
+
+   	<h3>4.1 Server capacity  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	We add the server concept in our data center. Each server has a capacity.
+   	Each VM a consumption. So, we add 2 servers with 10 and 20 for their
+  	capacities. Our 5 VMs have [10,5,3,5,7] for their consumption. All VM are On.
+   	Each VM On must be placed on a server. So, if the VM1 is placed on Server1,
+   	the VM1 will consume all Server1 capacities. Find a correct placement.
+    
+    <h3>4.2 ...  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	We want exactly nbRunning VM On. For that, we define a ghost server (like a
+   	trash). This ghost server has a big capacity, each All Vm Off must be placed
+   	on the Ghost server. 
+   
+    <h3>4.3 ...  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	Same as previous question, but we want maximize our profit.
+	
+    <h3>4.4 ...  <span class="badge badge-secondary">5 minutes</span></h3>
+
+	Each server has a VM power consumption, for each VM placed on it, the server
+   consumes Xw. (ex: if the VM power consumption on Server1 is equal to 100,
+   then, if 2 VMs are placed on Server1, the Server1 power consumption is equal
+   to 200. If the server is unused (no VM), it’s power consumption is equal to
+   0). We want exactly nbRunning VM. We want to maximize our profit.
+   Unfortunately, 1 W cost 1 dollar. So our profit is the sum of VM On minus the
+   total power consumption. In this question, We want exactly nbRunning VM On
+   and maximize our profit.
+   
+  </div> <!-- fin de <div class="border-top"> --> 
+  <!-- FIN DE PARTIE 2 -->
+  
+
+
+<div class="alert alert-warning">
+      <h4 class="alert alert-warning">Oufff.. finish!</h4>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
+</body>
+</html>

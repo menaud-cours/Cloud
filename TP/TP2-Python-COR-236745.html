@@ -1,0 +1,333 @@
+<style>blockquote{  font-style: normal;  margin-left: 32px;  border-left: 4px solid #CCC;  padding-left: 30px;}</style>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css" integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+  <title>ESXi Python</title>
+  
+  <meta name="description" content="Cluster">
+  <meta name="author" content="Jean-Marc Menaud">
+</head>
+
+<body>
+  <div class="container">
+  
+
+	
+  <h1>ESXi Python access</h1>
+  	<p>
+	</p>
+	
+	
+	 <!-- PARTIE 1 -->
+  <div class="border-top">
+
+<h2>utils.py </h2>
+	<pre><code class="language-python">
+from pyVim.connect import SmartConnect
+from pyVmomi import vim
+
+
+def connect():
+    """
+    Connexion to ESXi/vCenter. 
+     - host: the IP or hostname of the ESXi/vCenter
+     - user: ESXi/vCenter user
+     - pwd: ESXi/vCenter password
+    """
+    service_instance = SmartConnect(host="10.144.208.13", user="root", pwd="PE3h3r$!", disableSslCertValidation=True)
+    return service_instance.RetrieveServiceContent()
+
+
+def get_vm(content, vm_name = None):
+    """
+    Get the VM from its name
+     - content: the vmWare ServiceContent
+     - vm_name (optional): the name of the VM to retrieve
+    """
+    if vm_name is None:
+        vm_name = "fileserver"
+    container = content.rootFolder
+    view_type = [vim.VirtualMachine]
+    recursive = True
+
+    container_view = content.viewManager.CreateContainerView(
+        container, view_type, recursive
+    )
+    vm_list = container_view.view
+    for vm in vm_list:
+        if vm.name == vm_name:
+            return vm
+	</code></pre>
+
+
+<h2>0_vm_list.py </h2>
+    
+
+	<pre><code class="language-python">
+from pyVim.connect import SmartConnect
+from pyVmomi import vim
+
+
+def main():
+    service_instance = SmartConnect(host="10.144.208.XX", user="root", pwd="XXXX", disableSslCertValidation=True)
+
+    print("ESXi/vCenter Time")
+    print(" - %s" % service_instance.CurrentTime())
+    content = service_instance.RetrieveServiceContent()
+    container = content.rootFolder
+
+    view_type = [vim.VirtualMachine]
+    recursive = True
+
+    container_view = content.viewManager.CreateContainerView(
+        container, view_type, recursive
+    )
+    vm_list = container_view.view
+
+    print("VM List:")
+    for vm in vm_list:
+        print(" - " + vm.name)
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+	
+<h2>1_vm_config.py </h2>
+
+	<pre><code class="language-python">
+import utils
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    print("VM Name: {0}".format(virtual_machine.name))
+    print("PowerState: {0}".format(virtual_machine.summary.runtime.powerState))
+    print("Firmware: {0}".format(virtual_machine.config.firmware))
+    print("Memory size: {0}".format(virtual_machine.config.hardware.memoryMB))
+    print("Number of CPUs: {0}".format(virtual_machine.config.hardware.numCPU))
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+
+<h2>2_power_on.py </h2>
+
+	<pre><code class="language-python">	
+	import utils
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    virtual_machine.PowerOn()
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+
+<h2>3_power_off.py </h2>
+	<pre><code class="language-python">	
+import utils
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    virtual_machine.PowerOff()
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+
+<h2>4_suspend.py </h2>
+	<pre><code class="language-python">	
+import utils
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    virtual_machine.Suspend()
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+	
+<h2>5_resume.py </h2>
+	<pre><code class="language-python">	
+import utils
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    virtual_machine.PowerOn()
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+
+<h2>6_vm_snapshot.py </h2>
+	<pre><code class="language-python">	
+import utils
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    # Snapshot the VM
+    snapshot_name = "Snap_01"
+    snapshot_description = "Test Snapshot"
+    virtual_machine.CreateSnapshot_Task(
+        name=snapshot_name,
+        description=snapshot_description,
+        memory=True,
+        quiesce=False,
+    )
+    # List the existing snapshots
+    snap_info = virtual_machine.snapshot
+    if snap_info is not None:
+        print("Exiting Snapshots:")
+        tree = snap_info.rootSnapshotList
+        while tree[0].childSnapshotList is not None:
+            print(" - {0} => {1}".format(tree[0].name, tree[0].description))
+            if len(tree[0].childSnapshotList) < 1:
+                break
+            tree = tree[0].childSnapshotList
+    else:
+        print("No Snapshot")
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+	
+<h2>7_vm_remove_snapshots.py </h2>
+	<pre><code class="language-python">	
+import utils
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+
+    virtual_machine.RemoveAllSnapshots()
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>
+	
+<h2>8_vm_cpu_info.py </h2>
+	<pre><code class="language-python">	
+import utils
+from pyVmomi import vim
+
+
+def main():
+    # Connection to the vCenter
+    content = utils.connect()
+    # Get the VM (see utils.py)
+    virtual_machine = utils.get_vm(content)
+    content = utils.connect()
+
+    # create a mapping from performance stats to their counterIDs
+    # counterInfo: [performance stat => counterId]
+    # performance stat example: cpu.usagemhz.LATEST
+    # counterId example: 6
+    counter_info = {}
+    for counter in perf_manager.perfCounter:
+        if counter.groupInfo.key == "cpu":
+            full_name = (
+                counter.groupInfo.key
+                + "."
+                + counter.nameInfo.key
+                + "."
+                + counter.rollupType
+            )
+        counter_info[full_name] = counter.key
+    # Get all available metric IDs for this VM
+    counter_ids = [
+        m.counterId
+        for m in perf_manager.QueryAvailablePerfMetric(entity=virtual_machine)
+    ]
+
+    # Using the IDs form a list of MetricId
+    # objects for building the Query Spec
+    metric_ids = [
+        vim.PerformanceManager.MetricId(counterId=counter, instance="*")
+        for counter in counter_ids
+    ]
+
+    # Build the specification to be used
+    # for querying the performance manager
+    spec = vim.PerformanceManager.QuerySpec(
+        maxSample=1, entity=virtual_machine, metricId=metric_ids
+    )
+    # Query the performance manager
+    # based on the metrics created above
+    result_stats = perf_manager.QueryStats(querySpec=[spec])
+
+    output = ""
+    # Loop through the results and print the output
+    for _ in result_stats:
+        for val in _.value:
+            if val.id.counterId in list(counter_info.values()):
+                counterinfo_k_to_v = list(counter_info.keys())[
+                    list(counter_info.values()).index(val.id.counterId)
+                ]
+                if val.id.instance == "":
+                    output += " - %s: %s\n" % (counterinfo_k_to_v, str(val.value[0]))
+    print("VM CPU Informations :")
+    print(" - vm.name:" + virtual_machine.name)
+    print(output)
+
+
+if __name__ == "__main__":
+    main()
+	</code></pre>				
+
+  </div> <!-- fin de <div class="border-top"> --> 
+  <!-- FIN DE PARTIE 1 -->
+ 
+  
+
+
+<div class="alert alert-warning">
+      <h4 class="alert alert-warning">Oufff.. finish!</h4>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
+</body>
+</html>

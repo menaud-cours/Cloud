@@ -1,0 +1,578 @@
+<!doctype html>
+
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css"
+		integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+	<title>L'hyperviseur VMWare : ESXi </title>
+
+	<meta name="description" content="Cluster">
+	<meta name="author" content="Jean-Marc Menaud">
+</head>
+
+<body>
+	<div class="container">
+		<h1>l'ESXi</h1>
+		<p>
+			Premier TP sur l'hyperviseur en charge d'exécuter les machines virtuelles.
+		</p>
+		<p>Salons discord : https://discord.gg/4VZMMDu</p>
+		<!-- PARTIE 1 -->
+		<div class="border-top">
+
+			<h2> 1. Graphical Unit Interface (GUI) </h2>
+			<HR size=2 align=center width="100%">
+
+			<h3>1.1 Your ESXi</h3>
+
+			<h4>1.1.1 Try to connect on your ESXi. <span class="badge badge-secondary">5 minutes</span></h4>
+			Try to connect on your ESXi. user : root - Password : NTEcloud$$
+
+			Pas de difficulté particulière
+
+			<table border=2>
+				<tr>
+					<td>Nom </td>
+					<td>URL </td>
+					<td>SSH port </td>
+					<td> pESXi </td>
+				</tr>
+				<tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx001.cumulus.ovh" target="_blank">vesx001.cumulus.ovh</a></td>
+					<td>21001</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx002.cumulus.ovh" target="_blank">vesx002.cumulus.ovh</a></td>
+					<td>21002</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx003.cumulus.ovh" target="_blank">vesx003.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx004.cumulus.ovh" target="_blank">vesx004.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx005.cumulus.ovh" target="_blank">vesx005.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx006.cumulus.ovh" target="_blank">vesx006.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td><a href="https://vesx007.cumulus.ovh" target="_blank">vesx007.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx008.cumulus.ovh" target="_blank">vesx008.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx009.cumulus.ovh" target="_blank">vesx009.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx010.cumulus.ovh" target="_blank">vesx010.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx011.cumulus.ovh" target="_blank">vesx011.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx012.cumulus.ovh" target="_blank">vesx012.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx013.cumulus.ovh" target="_blank">vesx013.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx014.cumulus.ovh" target="_blank">vesx014.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx015.cumulus.ovh" target="_blank">vesx015.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx016.cumulus.ovh" target="_blank">vesx016.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx017.cumulus.ovh" target="_blank">vesx017.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx018.cumulus.ovh" target="_blank">vesx018.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="https://vesx019.cumulus.ovh" target="_blank">vesx019.cumulus.ovh</a></td>
+					<td>21000+"vsexnumber"</td>
+					<td>6</td>
+				</tr>
+			</table>
+
+			<h4>1.1.2 Your vESXi is connected by Bridge, Nat or Host Only on the pESXi ? <span
+					class="badge badge-secondary">15 minutes</span></h4>
+			<p>Search on google and understand the difference between Bridge, Nat and Host Only.</p>
+
+			Montrer la diapo du cours définissant les trois notions.
+
+			<h3>1.2 ESXi GUI </h3>
+
+
+			<h4>1.2.1 Play with the GUI <span class="badge badge-secondary">5 minutes</span></h4>
+			<p> More precisely, inspect the three main corposants: host, switch, datastore.
+			</p>
+
+			<h4>1.2.2 Create and Play with your tinyVM <span class="badge badge-secondary">25 minutes</span></h4>
+			<p> Now, we are ready to start our first VM. First, download and install a simple OVA. File can be found <a
+					href="http://menaud.fr/Cours/Cloud/TP/PS1/OVA-Linux/yVM.ova">here</a>
+			</p>
+			<p>
+				Find the tinyVM's IP.
+			</p>
+			<p>Thick Provisioning and Thin Provisioning ? understand the difference </p>
+			<p> Start, stop, suspend, restart your first VM. Explore the datastore, list all files required by this
+				Linux VM.
+			</p>
+			<p>
+				This tinyVM was configured with 48 Mb, it’s not sufficient for a correct execution, change this value to
+				64 Mb.
+			</p>
+
+			<h4>1.2.3 SSH ESXi <span class="badge badge-secondary">5 minutes</span></h4>
+
+			<p> Activate (if not) on the ESXi the SSH server (with the GUI) </p>
+			<p>Connect with the root user by SSH on your ESXi on the port (21000+<i style="color:red;">vesxnumber</i>)
+			</p>
+			<p> For windows users : download and use putty.exe. <a
+					href="http://menaud.fr/Cours/Cloud/TP/PS2/SSH-Windows/putty-64bit-0.70-installer.msi">here</a>
+			</p>
+			<p>On Linux ou Mac :</p>
+			<code>ssh -p 21011 root@vesx011.cumulus.ovh </code><br>
+			<p>ssh -p (21000+<i style="color:red;">vesxnumber</i>) root@vesx<i
+					style="color:red;">vesxnumber</i>.cumulus.ovh </p>
+
+			<h4>1.2.4 SSH on your tinyVM <span class="badge badge-secondary">5 minutes</span></h4>
+			<p> If you are connected by VPN on cumulus.ovh, you can connect directly to the VM by ssh : username: tc
+				password: VMware1! </p>
+
+
+			<h4>1.2.5 CPU </h4>
+			<p>When you run <code>stress -c 2</code> on your tinyVM, you may see activity on only one CPU in the CPU
+				graph. This happens because tinyVM may have only one physical CPU, or the second virtual CPU is not
+				fully scheduled, so the load appears only on the active CPU.</p>
+
+			<p>ESXi %RDY Explanation</p>
+			<p>After connecting via SSH and running <code>esxtop</code>, the <code>%RDY</code> column shows the
+				percentage of time a virtual CPU was ready to run but could not get scheduled on a physical CPU. A high
+				%RDY indicates CPU contention on the host.</p>
+
+
+			<h4>1.3 Network</h4>
+			<h5>DHCP</h5>
+			<h4>1.3.1 Understand how your VM is connected with yours neighbors <span class="badge badge-secondary">25
+					minutes</span></h4>
+
+			<p> If you use the web console. Be careful, the keyboard is a "qwerty".</p>
+
+			<p> Install iperf in your tinylinux</p>
+
+			Download the package: <code>
+		wget http://www.menaud.fr/iperf.tcz </code>
+			<br />
+			Install the package:<code> tce-load -i iperf
+		</code>
+			<!-- Alternative: wget http://www.tinycorelinux.net/4.x/x86/tcz/iperf.tcz <br/> -->
+
+			<p> Read the <a href="https://openmaniak.com/fr/iperf.php" target="_blank">documentation</a> and start the
+				iperf server <code> iperf -s &amp; </code></p>
+			</p>
+
+
+
+			<ul>
+				<li>First use iperf in your local VM IP 192.168.3.X and save your network throughput. </li>
+				<li> Next, use iperf client with a distant VM on the same server (pESXi) </li>
+				<li>Finaly, use iperf client with a distant VM on a different server (pESXi) and save the network
+					throughput.</li>
+				<li>Concluded.</li>
+
+				<li>Save yours (3) results and send by email to jean-marc.menaud@imt-atlantique.fr like this :</li>
+				<ul>
+					<li>192.168.3.vesxnumber -> 192.168.3.vesxnumber : 40Gb/s</li>
+					<li>192.168.3.vesxnumber -> 192.168.3.vesxnumber : 10Gb/s</li>
+					<li>192.168.3.vesxnumber -> 192.168.3.vesxnumber : 1Gb/s</li>
+				</ul>
+
+			</ul>
+			<h4>1.3.2 vswitch <span class="badge badge-secondary">10 minutes</span></h4>
+			<ol>
+				<li>On the ESXi host client, go to <strong>Network</strong> &gt; <strong>Virtual Switch</strong>.</li>
+				<li>Select <strong>vSwitch0</strong> and click <strong>Modify Parameters</strong>.</li>
+				<li>Go to <strong>Traffic Shaping</strong> (Formation de trafic).</li>
+				<li>Set the bandwidth limit to <strong>100 Mbps</strong> and save.</li>
+				<li>Run <code>iperf</code> between VMs to measure bandwidth.</li>
+				<li>Return to <strong>Traffic Shaping</strong> and set bandwidth to <strong>1 Gbps</strong>.</li>
+				<li>Run <code>iperf</code> again to verify the new bandwidth.</li>
+			</ol>
+
+			<h4>1.4 VM Advanced</h4>
+			<h4>1.4.1 Migration</h4>
+			<ol>
+				<li>Create a tinyVM named <strong>tinyVMmigXX</strong> on <strong>vSanDatastoreXX</strong>.</li>
+				<li>Suspend the VM from the ESXi host client.</li>
+				<li>Go to <strong>vSanDatastoreXX</strong>, locate the VM folder, and <strong>save the VM</strong>.</li>
+				<li>Find the file <strong>tinyVM.vmx</strong> in the datastore; this is the in-memory data file.</li>
+				<li>Check which other ESXi hosts share the same <strong>vSanDatastoreXX</strong>.</li>
+				<li>Connect to another host sharing the datastore.</li>
+				<li>Resume the VM from that host. The VM will load the in-memory file and continue execution.</li>
+				<li>VM migration is now complete.</li>
+			</ol>
+
+			<h4>1.4.2 Snapshot</h4>
+			<ol>
+				<li>Open the tinyVM console from the ESXi host client (IHM).</li>
+				<li>Inside the VM, create a directory named <strong>TOTO</strong>.</li>
+				<li>Create a snapshot of the VM and name it <strong>Snapshot1</strong>.</li>
+				<li>In the VM console, create another directory named <strong>TUTU</strong>.</li>
+				<li>Restore the VM to <strong>Snapshot1</strong> to revert the state before <strong>TUTU</strong> was
+					created.</li>
+			</ol>
+
+
+
+			<h4>1.5 New VM from scratch <span class="badge badge-secondary">10 minutes</span></h4>
+			<p>Finally, Install a new VM Linux from scratch. Download the Iso file and install, start and ping the Linux
+				Core 5.4.
+				File can be found <a href="http://menaud.fr/Cours/Cloud/TP/PS1/ISOLinux/Core-5.4.iso">here</a>
+				OS:Linux 32b ; RAM : 64Mb ; Disk : 20Mb
+			</p>
+
+
+
+
+
+		</div> <!-- fin de <div class="border-top"> -->
+		<!-- FIN DE PARTIE 1 -->
+
+		<!-- PARTIE 2 -->
+		<div class="border-top">
+
+			<h2> 2 Around the command line </h2>
+			<HR size=2 align=center width="100%">
+
+			<p> All this practical session will be realize
+				from SSH and command line.You can use esxcli commands and vim-cmd.
+				First, read these tutorials :
+				<a href="http://www.menaud.fr/Cours/Cloud/Subjects/PS1-ESXCLI.html">esxcli</a>
+				and <a href="http://www.menaud.fr/Cours/Cloud/Subjects/DocPS1/Quick.pdf">vim-cmd</a> <br>
+				A command list can be found <a
+					href="http://www.menaud.fr/Cours/Cloud/Subjects/DocPS1/cmd-esxi.html">here</a>
+			</p>
+
+			<h3>2.1 First command </h3>
+			<h4>2.1.1 SSH on ESXi (as previously) <span class="badge badge-secondary">5 minutes</span></h4>
+			<p> Activate (if not) on the ESXi the SSH server (with the GUI) </p>
+			<p>Connect by SSH on your ESXi </p>
+
+			<h4>2.1.2 From command line, reboot your ESXi <span class="badge badge-secondary">5 minutes</span></h4>
+			<p> Don’t forget to change your esx state to maintenance mode </p>
+			**Corrections**<br>
+			ESX must in maintenance mode<br>
+			esxcli system maintenanceMode set -e 1<br>
+			Just shutdown with rebbot<br>
+			esxcli system shutdown reboot -r "maintenance"<br>
+
+
+
+			<h4>2.1.3 Around VM life cycle <span class="badge badge-secondary">25 minutes</span></h4>
+			<p>Find the correct command line to list all VM on your ESXi </p>
+			<p> Note on a paper all VM VMWare ID. </p>
+			**Corrections**<br>
+			All VM registered :<br>
+			a. vim-cmd vmsvc/getallvms<br>
+			VM running<br>
+			b. esxcli vm process list<br>
+
+
+			<p> Start, Stop VM from the command line </p>
+
+			**Corrections**<br>
+			a. vim-cmd vmsvc/power.off VMid<br>
+			b. vim-cmd vmsvc/power.on VMid<br>
+			c. vim-cmd vmsvc/power.reboot VMid<br>
+
+
+			<p>Unregister a VM. Verify from GUI that the VM is no visible.</p>
+
+			**Corrections**<br>
+			a. vim-cmd hostsvc/unregister VMid<br>
+
+
+			<p>Register the VM previously unregister. What’s happen with the VMWare ID.</p>
+			**Corrections**<br>
+			a. vim-cmd solo/registervm /vmfs/volumes/datastore/VM2/VM2.vmx<br>
+
+			<p> Create a new VM (same name, same UUID), by command line, from files associated to the yVM. (You must
+				modify the VM file configuration) </p>
+
+			<blockquote>
+				<li> Find the command line for list the main properties of a VM. What is the UUID ? </li>
+				**Corrections**<br>
+				a. vim-cmd vmsvc/get.summary VMid<br>
+				<li> Try to start 2 VM with same name and same UUID (by directly modified the
+					VM file configuration. Don’t forget to reload the configuration) </li>
+			</blockquote>
+
+			<h4>2.1.4 Snapshot <span class="badge badge-secondary">10 minutes</span></h4>
+			<ol>
+				<li>Find the VM ID of your tinyVM:
+					<pre>vim-cmd vmsvc/getallvms</pre>
+				</li>
+				<li>Create snapshots from the command line:
+					<pre>vim-cmd vmsvc/snapshot.create <strong>vmid</strong> "titi"</pre>
+					<pre>vim-cmd vmsvc/snapshot.create <strong>vmid</strong> "toto"</pre>
+				</li>
+				<li>List snapshots to find their IDs:
+					<pre>vim-cmd vmsvc/snapshot.get <strong>vmid</strong></pre>
+				</li>
+				<li>Revert to a previous snapshot (replace IDs as needed):
+					<pre>vim-cmd vmsvc/snapshot.revert <strong>vmid</strong> <strong>snapshotId</strong> 0</pre>
+				</li>
+				<li>Start or restart the VM after reverting:
+					<pre>vim-cmd vmsvc/power.on <strong>vmid</strong></pre>
+				</li>
+			</ol>
+
+			<h4>2.1.5 Create Vm <span class="badge badge-secondary">10 minutes</span></h4>
+			<ol>
+				<li>Use files associated to the yVM to create a new VM (modify the VM file configuration as needed).
+				</li>
+				<li>Find the command line to list the main properties of a VM. Identify the UUID.</li>
+				<li>Try to start 2 VMs with the same name and same UUID by directly modifying the VM file configuration.
+					Don’t forget to reload the configuration.</li>
+			</ol>
+
+
+
+			<h4>2.1.4 Around users <span class="badge badge-secondary">10 minutes</span></h4>
+
+			<p> Create and manage a new user for your hypervisor. Restrict to ReadOnly his permissions. </p>
+
+			**Corrections**<br>
+			Add an user<br>
+			a. esxcli system account add -i test1 -p "K-azertyuiop44" -c "K-azertyuiop44"<br>
+			permissions<br>
+			b. esxcli system permission list<br>
+			c. esxcli system permission set --id test1 -r ReadOnly<br>
+
+
+
+
+
+		</div> <!-- fin de <div class="border-top"> -->
+		<!-- FIN DE PARTIE 2 -->
+
+		<!-- PARTIE 3 -->
+		<div class="border-top">
+
+			<h3>2.2 Advanced command </h3>
+
+			<HR size=2 align=center width="100%">
+
+			<h4>2.2.1 VM from scratch <span class="badge badge-secondary">15 minutes</span></h4>
+
+			<p> Download from command line the iso file :
+			<ul>
+				<li> wget http://www.menaud.fr/Cours/Cloud/TP/PS1/ISOLinux/Core-5.4.iso </li>
+				<li> For that you need to add a DNS server (from command line) in your ESXi. </li>
+			</ul>
+			</p>
+
+			**Corrections**<br>
+			wget http://www.menaud.fr/Cours/Cloud/TP/ISOLinux/Core-5.4.iso<br>
+			For that you need to add a DNS server (from command line) in your ESXi.<br>
+			esxcli network ip dns server add -s 8.8.8.8<br>
+			wget http://www.menaud.fr/Cours/Cloud/TP/ISOLinux/Core-5.4.iso<br>
+
+
+			<p> Created the VM folder (Core), created the virtual hard disk for the VM with the command - vmkfstools
+				(5Gb, lsilogic) (Core.vmdk). </p>
+			**Corrections**<br>
+			a. mkdir /vmfs/volumes/datastore1/Core<br>
+			b. vmkfstools -c 15G -a lsilogic Core.vmdk<br>
+
+
+			<p> Created a VMX file with the following text, change ??? by the correct value : </p>
+			<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+				config.version = "8" <br>
+				virtualHW.version= "7" <br>
+				guestOS = " Linux" <br>
+				memsize = "1024" <br>
+				displayname = "Core" <br>
+				scsi0.present = "TRUE" <br>
+				scsi0.virtualDev = "lsilogic" <br>
+				scsi0:0.present = "TRUE" <br>
+				scsi0:0.fileName = "Core.vmdk" <br>
+				ide1:0.present = "true" <br>
+				ide1:0.deviceType = "cdrom-image" <br>
+				ide1:0.filename = " /vmfs/volumes/4a68046d-2159a120-ebac-001a9253e68f/Core-5.4.iso" <br>
+				ide1:0.startConnected = "TRUE" <br>
+				ethernet0.present= "true" <br>
+				ethernet0.startConnected = "true" <br>
+				ethernet0.virtualDev = "e1000"<br>
+			</div>
+			</li>
+
+			<p> Changed the permissions on the VMX file with chmod 744 Core.vmx. </p>
+
+			**Corrections**<br>
+			a. chmod 744 Core.vmx <br>
+
+			<p> Add to the inventory the VM (register the VM) and power on the VM </p>
+			**Corrections**<br>
+			a. vim-cmd solo/registervm /vmfs/volumes/datastore1/Core/Core.vmx <br>
+
+			<p> At this point the VM was up and running and the last thing to do was to disconnect the CD-ROM in the VM
+			</p>
+
+			**Corrections**<br>
+			a. To set the CD-ROM back to a type of client device and also to uncheck the "Connect at power on" option, I
+			edited the VMX file and changed this - <br>
+			b. ide1:0.present = "true"<br>
+			ide1:0.deviceType = "cdrom-image"<br>
+			ide1:0.filename = "/vmfs/volumes/4a68046d-2159a120-ebac-001a9253e68f/win2k3_x64.iso"<br>
+			ide1:0.startConnected = "TRUE"<br>
+			c. to this -<br>
+			d. ide1:0.present = "true"<br>
+			ide1:0.clientDevice = "TRUE"<br>
+			ide1:0.deviceType = "atapi-cdrom"<br>
+			ide1:0.startConnected = "FALSE"<br>
+
+
+
+			<h4>2.2.2 VM network <span class="badge badge-secondary">15 minutes</span></h4>
+
+			<p> At this point we went to check IP connectivity and noticed the VM did not have an IP address. You can
+				verified this with :
+			<ul>
+				<li> vim-cmd vmsvc/get.summary X </li>
+			</ul>
+			</p>
+
+			<p> Edited the VMX file and added completed the below line.
+			<ul>
+				<li> ethernet0.networkName = " VM Network " </li>
+			</ul>
+			</p>
+
+			<p> Reloaded the VMX file (vim-cmd vmsvc/reload X), Verified that ESXi saw the configuration change made.
+			</p>
+
+			<p> Set the virtual NIC to a status of connected.
+				The device.connection option requires the VMID,
+				the deviceKey and connect setting.
+				Connect can be set to 1 (connected) or 0 (disconnected).
+				The deviceKey can be found from the output device.getdevices.
+				As shown above in bold, the deviceKey for the vnic for this VM is 4000.
+				Once the command was run the vnic in the VM connected and wasable to get an IP address from a DHCP
+				server.
+
+			<div style="padding:3px; border:2px dotted #a5a5a5; background-color:#e3e3e3;">
+				~ # vim-cmd vmsvc/device.connection Insufficient arguments.<br>
+				Usage: device.connection vmid deviceKey connect Connect/Disconnect the virtual device specified <br>
+				~ # vim-cmd vmsvc/device.connection 16 4000 1 <br>
+				# vim-cmd vmsvc/get.summary 16 | grep ipAddress <br>
+				ipAddress = "192.168.1.56",
+			</div>
+			</p>
+
+			<h4>2.2.3 VM autostart <span class="badge badge-secondary">5 minutes</span></h4>
+
+			<p> The configuration values for VM automatic startup and shutdown is stored in the file
+				/etc/vmware/hostd/vmAutoStart.xml. By default auto start is not enabled.
+				Change it !
+			</p>
+
+			<pre><code class="language-python">
+&lt;ConfigRoot>
+&lt;AutoStartOrder>
+&lt;_length>0&lt;/_length>
+&lt;_type>vim.host.AutoStartManager.AutoPowerInfo[]&lt;/_type>
+&lt;/AutoStartOrder>
+&lt;SystemDefaults>
+&lt;_type>vim.host.AutoStartManager.SystemDefaults&lt;/_type>
+&lt;enabled>true&lt;/enabled>
+&lt;startDelay>120&lt;/startDelay>
+&lt;stopAction>PowerOff&lt;/stopAction>
+&lt;stopDelay>120&lt;/stopDelay>
+&lt;waitForHeartbeat>false&lt;/waitForHeartbeat>
+&lt;/SystemDefaults>
+&lt;/ConfigRoot>
+</pre></code>
+
+
+		</div>
+
+
+		<div class="alert alert-warning">
+			<h4 class="alert alert-warning">Finish !</h4>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"
+			integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"
+			integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<style>
+	blockquote {
+		font-style: normal;
+		margin-left: 32px;
+		border-left: 4px solid #CCC;
+		padding-left: 30px;
+	}
+</style>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css"
+		integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<title>TP5 : DRS/HA/FT VCenter</title>
+
+	<meta name="description" content="Cluster">
+	<meta name="author" content="Jean-Marc Menaud">
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<h2> Practical session 5 Correction : Fonctionnalités avancées du vCenter</h2>
+
+
+		<HR size=2 align=center width="100%">
+
+
+		<h4 align=center> Salons discord : https://discord.gg/4VZMMDu</h4>
+
+		<HR size=2 align=center width="100%">
+
+		<ul>
+			<li> Utiliser de manière privilégiée google chrome</li>
+			<li> Quelques incohérences dans le navigateur ont pu être observées, vide le cache dans ce cas</li>
+
+			<li>Connect on the VCenter. </li>
+			<ul>
+				<li>
+					<a href="https://vcenter.cumulus.ovh">https://vcenter.cumulus.ovh</a>
+				</li>
+				<li> Launch the HTML5 Client</li>
+			</ul>
+		</ul>
+
+		<br>
+		<table border=2>
+			<tr>
+				<td>Nom </td>
+				<td>URL </td>
+				<td>Login </td>
+				<td>Password </td>
+			</tr>
+			<tr>
+			<tr>
+				<td>Menaud Jean-Marc </td>
+				<td><a href="https://vcenter.cumulus.ovh" target="_blank">https://vcenter.cumulus.ovh</a></td>
+				<td>adminDC1@vsphere.local</td>
+				<td>adminDC1$$</td>
+			</tr>
+		</table>
+
+		<br>
+		<br>
+		<br>
+
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : DRS (Distributed Ressource Scheduler) </h3>
+		<HR size=2 align=center width="100%">
+
+		<h2>0 Intro</h2>
+
+		<p>La Fonction DRS (Distributed Ressource Scheduler) est disponible dans un cluster VMware,
+			cette fonction permet d’équilibrer la charge des hôtes grâce au déplacement des machines
+			virtuelles de manière automatique (vMotion). Elle va répartir les VMs sur les différents
+			hôtes du cluster en fonction de leur utilisation et de leurs ressources.
+		<p>
+		<p>
+			Voici un lien de documentation:
+			https://docs.ovh.com/fr/private-cloud/vmware-drs-distributed-ressource-scheduler-new/
+		</p>
+
+		<h2>1 DRS <span class="badge badge-secondary">X minutes</span></h2>
+		<h3>1.1 Environnement logiciel</h3>
+		Pour notre TP nous allons avoir besoin de 3 VM.
+
+		<h4>1.1.1 Créer VM</h4>
+		<li> Créer une machine virtuelle (tinyVM1) sur un ESXi à partir de l'OVA yVM.ova sur le stockage de type vSan
+			(un serveur SSH est inclus dans la VM)</li>
+		<ul>
+			<li> <code>wget www.menaud.fr/tools/yVM.ova</code> </li>
+			<li> Modifier les capacités RAM de cette VM pour monter à 100 Mo</li>
+			<li> Démarrer la VM en mode ligne de commande</li>
+			<li> Connectez-vous en ssh (Compte utilisateur : tc / VMware1!) sur la VM via l'ESXi </li>
+			<li> (Pensez au pare-feu : activer la sortie SSH sur votre ESX via Click droit sur l'ESX → Paramètres →
+				Système/Pare-feu → Modifier → SSH Client → Activer)</li>
+			<li> Récupérez par wget, puis installez le package stress.tgz à l'aide de l'outil tce-load</li>
+			<li> <code>wget www.menaud.fr/tools/stress.tcz</code></li>
+		</ul>
+
+		<h4>1.1.2 Charge CPU</h4>
+		<li> Créer une charge CPU avec l'outil stress. Observer les consommations CPU des VM et les consommations de
+			chaque CPU de l'hyperviseur.</li>
+		<ul>
+			<li> Noter les consommations CPU après quelques minutes. Comment expliquez-vous ces chiffres ?</li>
+		</ul>
+		**Corrections**<br>
+		<pre><code class="language-python">
+ssh tc@42.42.1.101
+stress -c 1
+Sélectionner l'ESXi hébergeant les VM > VMs
+ou
+Sélectionner l'ESXi ou la VM > Monitor > Performance / Overview
+
+Plusieurs cas possibles :
+CPU ESXi : 2 CPU à 100 %
+CPU VM : 75 %
+Normalement cette configuration est temporaire ! Ensuite, on se stabilise sur :
+
+CPU 0 ESXi : 100 %
+CPU 1 ESXi : 3 %
+CPU VM : 33 %
+Les 3 VM se partagent un seul CPU de l'ESXi. vCenter réserve l'autre CPU de l'ESXi pour la gestion des VM.
+</code></pre>
+
+		<h4>1.1.3 Cloner VM</h4>
+		<li> Cloner la tinyVM1 deux fois afin d'avoir 3 tinyVM (2 et 3) démarrées sur le même ESXi</li>
+		**Corrections**<br>
+		Clic droit sur la VM > Clone > Clone to Virtual Machine...<br>
+		Cocher la case "Power on virtual machine after creation"<br>
+
+		<h4>1.1.4 Stress VM</h4>
+		<li> Exécuter un stress CPU sur chaque VM. Quelles sont les consommations CPU de chaque VM et de l'hyperviseur
+			après quelques minutes ?</li>
+		**Corrections**<br>
+		<pre><code class="language-python">
+ssh tc@42.42.1.101
+stress -c 1
+Sélectionner l'ESXi hébergeant les VM > Monitor > Performance / Overview
+
+Plusieurs cas possibles :
+CPU ESXi : 2 CPU à 100 %
+CPU VM : 75 %
+CPU 0 ESXi : 100 %
+CPU 1 ESXi : 3 %
+CPU VM : 33 %
+Les 3 VM se partagent un seul CPU de l'ESXi. vCenter réserve l'autre CPU de l'ESXi pour la gestion des VM.
+</code></pre>
+
+		<h4>1.1.5 CPU Ready</h4>
+		<li> À quoi correspond la métrique de CPU appelée cpu_ready. Quelles sont ces valeurs ?</li>
+		**Corrections**<br>
+		<p>
+			CPU READY VM : 67 %<br>
+			Le cpu_ready représente le temps pendant lequel la VM est en attente d'obtenir une ressource CPU
+			physique.<br>
+			Pendant ce temps là, elle n'exécute pas d'instructions.<br>
+			Quand les VM sont en attente du CPU physique de l'ESXi, elles ne consomment donc pas la ressource CPU.
+		</p>
+
+		<h3>1.2 En action !</h3>
+
+		<h4>1.2.1 Stop Stress</h4>
+		<li> Arrêter le stress CPU</li>
+		**Corrections**<br>
+		Ctrl-C dans les VM
+
+		<h4>1.2.2 Activer vMotion</h4>
+		<li> Activer le vMotion sur les ESXi</li>
+		**Corrections**<br>
+		Sélectionner un ESXi > Configure > Networking / VMKernel Adaptaters > Edit > cocher vMotion
+
+		<h4>1.2.3 Activer DRS</h4>
+		<li> Activer la gestion dynamique des ressources (DRS) du cluster.</li>
+		**Corrections**<br>
+		Sélectionner le cluster > Services / vSphere DRS > Edit > vSphere DRS: On
+
+		<h4>1.2.4 Stress Cluster</h4>
+		<li> Exécuter un stress CPU sur les 3 VM et noter les consommations CPU après quelques minutes. Comment
+			expliquez-vous ces valeurs ?</li>
+		**Corrections**<br>
+		<pre><code class="language-python">
+Il est possible que DRS migre les VM avant l'application du stress CPU. Il est seul juge de l'équilibrage du cluster.
+ssh tc@42.42.1.101
+tce-load -i stress.tcz
+CPU 0 ESXi : 100 %
+CPU 1 ESXi : 0 %
+CPU VM : 100 %
+CPU READY : 0 %
+
+Les ESXi ont suffisamment de ressources CPU pour fournir les ressources demandées par leurs VM. Les VM n'attendent pas la ressource CPU (cpu_ready proche de 0 %) et consomment un CPU physique dans sa totalité (CPU à 100%).
+</code></pre>
+
+		<h4>1.2.5 Règles Placement</h4>
+		<li>Ajouter une règle de placement dans le cluster obligeant 2 VM à être hébergées sur des ESXi différents.<br>
+			Par exemple, les VM <strong>tinyVM1</strong> et <strong>tinyVM2</strong> doivent être séparées et ne jamais
+			s’exécuter sur le même hyperviseur.<br>
+			Vous pouvez ajouter cette règle à partir du panneau <em>"VM/Host Rule"</em> de l’onglet
+			<em>Configure</em>.<br>
+			Quelle règle avez-vous utilisée ?
+		</li>
+
+		**Corrections**<br>
+		<ul>
+			<li>Cliquez sur le cluster.</li>
+			<li>Allez dans l’onglet <strong>Configure</strong> puis dans <strong>VM/Host Rules</strong>.</li>
+			<li>Cliquez sur <strong>Add</strong> pour créer une nouvelle règle.</li>
+			<li>Sélectionnez le type : <strong>Separate Virtual Machines</strong>.</li>
+			<li>Ajoutez les VM concernées.</li>
+			<li>Validez la règle.</li>
+		</ul>
+
+		<h4>1.2.6 Fonctions Règles</h4>
+		<li> Décrivez les fonctions des règles disponibles</li>
+		**Corrections**<br>
+		Liste des VM/Host rules :<br>
+		<b>Keep Virtual Machines Together :</b> Les VM du groupe doivent être hébergées par le même hyperviseur.<br>
+		<b>Separate Virtual Machines :</b> Les VM du groupe doivent toutes être hébergées sur un hyperviseur
+		différent.<br>
+		<b>Virtual Machines to Hosts :</b><br>
+		- Must run on hosts in group : Un groupe de VM doit être hébergé sur un groupe d'hôtes.<br>
+		- Should run on hosts in group : Un groupe de VM devrait s'exécuter sur un groupe d'hôtes (peut ne pas être
+		respecté dans certaines conditions).<br>
+		- Must Not run on hosts in group : Un groupe de VM NE doit PAS être hébergé sur un groupe d'hôtes.<br>
+		- Should not run on hosts in group : Un groupe de VM ne devrait pas s'exécuter sur un groupe d'hôtes (peut ne
+		pas être respecté dans certaines conditions).<br>
+		<b>Virtual Machines to Virtual Machines :</b> En cas de panne, le premier groupe de VM sera redémarré avant le
+		second groupe.
+
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : High Availability (HA) </h3>
+		<HR size=2 align=center width="100%">
+		<h2>2 HA <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h4>2.1 Créer VM</h4>
+		<li> Si ce n'est déjà fait, créez une VM (yvm1) sur l'espace de stockage du vSan à partir de l'OVF yVM.ova </li>
+
+		<h4>2.2 Ping VM</h4>
+		<li> Depuis votre machine virtuelle JavaNfs30, lancer un ping vers la yvm1</li>
+
+		<h4>2.3 Crasher VM</h4>
+		<li> Provoquer un crash du système d'exploitation de la yvm1<br>
+			La commande suivante, exécutée à l'intérieur de la VM a "crasher", crash la VM : sudo sh -c "echo c >
+			/proc/sysrq-trigger"</li>
+
+		<h4>2.4 Vérification Ping</h4>
+		<li> Vérifier l'absence de réponse au ping correspondant au crash de la VM</li>
+
+		<h4>2.5 Configuration HA</h4>
+		<li> Configurer le mode haute disponibilité pour obtenir un redémarrage des VM en cas de panne de l'hyperviseur
+			(ESXi) et en cas de panne de la VM</li>
+		**Corrections**<br>
+		Sélectionner le cluster > Configure > vSphere Availibility > Edit<br>
+		vSphere HA: On<br>
+		Host Failure Response: Restart VMs<br>
+		VM Monitoring: VM Monitoring Only<br>
+		Enable heartbeat monitoring: VM Monitoring Only<br>
+		VM monitoring sensitivity: Custom, Failure interval: 30 seconds, Minimum uptime: 20 s<br>
+
+		<h4>2.6 Paramètres HA</h4>
+		<li> Quels sont les 2 paramètres utilisés lors de la détection de pannes sur les VM ? Expliquez-les</li>
+		**Corrections**<br>
+		Failure interval : Intervalle de temps durant lequel la VM n'émet plus son heartbeat avant que le service HA ne
+		la redémarre.<br>
+		Minimum uptime : Temps donné à la VM pour démarrer son système d'exploitation et commencer à émettre des
+		heartbeats. Pendant cette période, l'activité de la VM n'est pas surveillée. Cela évite de redémarrer la VM
+		avant qu'elle ait fini sa phase de démarrage.<br>
+		Pour les tinyVM, on peut réduire le "Minimum uptime" à 20 s car les VM démarrent très rapidement.<br>
+
+		<h4>2.7 Redémarrer VM</h4>
+		<li> Après avoir configuré correctement le mode HA du cluster, redémarrer la yvm1</li>
+		**Corrections**<br>
+		Clic droit sur la VM > Power > Reset
+
+		<h4>2.8 Test HA</h4>
+		<li> Relancer le ping sur la VM et crasher de nouveau le système d'exploitation. Après quelques minutes,
+			qu'observez-vous ? Pourquoi ?</li>
+		**Corrections**<br>
+		Pendant environ 3 minutes, la VM ne répond plus au ping car le système d'exploitation de la VM est crashé. Le
+		service de haute disponibilité détecte le crash de la VM et la redémarre.
+
+		<h4>2.9 Indisponibilté</h4>
+		<li> Quelle est la durée d'indisponiblité de la VM ? Comment réduire ce temps d'indisponibilité ?</li>
+		**Corrections**<br>
+		La durée d'indisponibilité de la VM est d'environ 2min30s.<br>
+		ping -W 4 -i 5 42.42.1.93 | tee ping.txt<br>
+		cat ping.txt | grep Unreachable | wc -l<br>
+		On a un ping toutes les 5 s. "Le nombre de réponses négatives (Unreachable) * 5" nous donne le temps qu'il a
+		fallu au service HA pour détecter la panne de la VM et redémarrer la VM.<br>
+		On peut réduire le temps d'indisponiblité en diminuant le temps du paramètre "Failure interval", par exemple, à
+		15 s.<br>
+
+		<h4>2.10 Déconnexion Réseau</h4>
+		<li> Tout en continuant à pinger la VM, déconnecter la carte réseau de l'ESXi hôte. Après quelques minutes,
+			qu'observez-vous ? Pourquoi ?</li>
+		**Corrections**<br>
+		Vous pouvez identifier l'ESXi hébergeant de la VM à partir de la page Summary de celle-ci. Le champ "Host" donne
+		l'adresse IP de l'ESXi. Celui-ci s'exécutant aussi dans une VM, on peut le retrouver en regardant les IP des VM
+		nommées vesxN (N est un entier).<br>
+		On lance le ping vers la tinyVM<br>
+		ping -W 4 -i 5 42.42.1.93 | tee ping.txt<br>
+		On déconnecte la carte réseau de l'ESXi<br>
+		Sélectionner la VM vesxN > Summary > VM Hardware / Edit Settings > Network Adapter 1 / Connected<br>
+		Après environ 2 minutes, on pinge de nouveau la VM. L'ESXi est toujours déconnecté mais la VM a été redémarrée
+		sur un autre ESXi.<br>
+
+		<h4>2.11 Reconnexion Réseau</h4>
+		<li> Reconnecté la carte réseau de l'ESXi et attendez sa reconnexion au datacenter</li>
+		**Corrections**<br>
+		Sélectionner la VM vesxN > Summary > VM Hardware / Edit Settings > Network Adapter 1 / Connected
+
+		<h3 align=center> Fonctionnalités avancées du vCenter : Fault Tolerance (FT) </h3>
+		<HR size=2 align=center width="100%">
+		<h2>3 FT <span class="badge badge-secondary">X minutes</span></h2>
+
+		<h4>3.1 Créer VM</h4>
+		<li>Nous allons installer une nouvelle VM : tinyTP.ovf. Pour cela, clic droit sur le cluster vSanStudentDCXX,
+			puis déployer un modèle OVF. Pour l'URL : <a href="http://www.menaud.fr/tools/tinyTP.ovf"
+				target="_blank">http://www.menaud.fr/tools/tinyTP.ovf</a> à déployer sur le vSanDatastoreXX</li>
+		**Corrections** <br>
+		Clic droit sur l’ESXi → Deploy OVF Template…<br>
+		Lors du choix du datastore, choisir le vsanDatastoreXX et valider les paramètres par défaut.
+
+		<h4>3.2 Activer FT</h4>
+		<li>Activer la tolérance aux pannes (Fault Tolerance) sur la tinyTP</li>
+		**Corrections** <br>
+		<ul>
+			<li>Configurer chaque ESXi du cluster :
+				<em>Configure → Networking → VMkernel Adapters → Edit → activer vMotion et Fault Tolerance Logging</em>.
+			</li>
+			<li>Activer ensuite la tolérance aux pannes sur la tinyTP :
+				Clic droit sur la VM → Fault Tolerance → Turn On Fault Tolerance.</li>
+		</ul>
+
+		<h4>3.3 Ping VM</h4>
+		<li>Lancer un ping vers la VM tinyTP depuis la VM Students</li>
+		**Corrections** <br>
+		Vérifier la connectivité réseau avec la commande <code>ping <VM-IP></code> depuis la VM Students.
+
+		<h4>3.4 Simuler Panne</h4>
+		<li>Pour simuler une panne, déconnecter la carte réseau d’un des ESXi exécutant la VM tinyTP</li>
+		**Corrections** <br>
+		<ul>
+			<li>Déconnecter la **carte réseau de la VM** (pas celle de l’hyperviseur) via vSphere Web Client :
+				Sélectionner la VM → Edit Settings → Virtual Hardware → Network Adapter → décocher **Connected**.</li>
+			<li>Observer que la VM continue de répondre aux pings grâce à la VM secondaire FT.
+				Attendre quelques minutes pour confirmer le basculement.</li>
+		</ul>
+
+
+		<h4>3.5 Différence HA</h4>
+		<li>Quelle différence observez-vous entre le HA et la tolérance aux pannes ?</li>
+		**Corrections** <br>
+		HA redémarre la VM sur un autre hôte après une panne (quelques secondes/minutes).
+		FT crée une VM secondaire active en parallèle, assurant la continuité immédiate.
+
+		<h4>3.6 Nombre VM / Fonctionnement</h4>
+		<li>Combien de VM sont hébergées sur le cluster ? Comment fonctionne la tolérance aux pannes ?</li>
+		**Corrections** <br>
+		Deux VM sont présentes sur le cluster : la tinyTP primaire et la tinyTP secondaire FT.
+		La VM secondaire prend le relais immédiatement en cas de panne de la VM principale, réduisant considérablement
+		la durée d’interruption.
+		Observer les VM dans l’onglet VMs du cluster.
+
+		<h4>3.7 Désactiver FT et HA</h4>
+		<li>Désactiver la tolérance aux pannes et le HA</li>
+		**Corrections** <br>
+		<ul>
+			<li>Sélectionner la VM tinyTP → Fault Tolerance → Turn Off Fault Tolerance</li>
+			<li>Sélectionner le cluster → Configure → vSphere Availability → Edit → vSphere HA : Off</li>
+		</ul>
+
+
+	</div>
+
+
+</body>
